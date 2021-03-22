@@ -48,6 +48,11 @@ int Stack<ItemType>::size() const
 template<class ItemType>
 bool Stack<ItemType>::push(const ItemType& newItem)
 {
+	//need to add a value via a node
+	Node<ItemType> * newNodePtr = new Node <ItemType> (newItem, headPtr);
+	headPtr = newNodePtr;
+	newNodePtr = NULL;
+
 	//increase the current size variable
 	currentSize++;
 	return true;
