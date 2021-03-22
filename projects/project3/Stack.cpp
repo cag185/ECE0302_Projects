@@ -8,9 +8,10 @@
 #include "Stack.hpp"
 #include "Node.hpp"
 
-// TODO: Implement the constructor here
+//DEFAULT CONSTRUCTOR
+// use the shortcut to make the head assign to the null pointer - done
 template<class ItemType>
-Stack<ItemType>::Stack() 
+Stack<ItemType>::Stack() : headPtr(nullptr);
 {
 }  // end default constructor
 
@@ -23,24 +24,32 @@ Stack<ItemType>::~Stack()
 		pop();
 }  // end destructor
 
-// TODO: Implement the isEmpty method here
+// isEmpty method -- Done
 template<class ItemType>
 bool Stack<ItemType>::isEmpty() const
 {
-	return true;
+	if(headPtr == nullptr)
+	{
+		return true
+	}
+	else{
+		return true;
+	}
 }  // end isEmpty
 
-// TODO: Implement the size method here
+// Size method -- Done
 template<class ItemType>
 int Stack<ItemType>::size() const
 {
-	return 0;
+	return currentSize;
 }  // end size
 
-// TODO: Implement the push method here
+// push method 
 template<class ItemType>
 bool Stack<ItemType>::push(const ItemType& newItem)
 {
+	//increase the current size variable
+	currentSize++;
 	return true;
 }  // end push
 
