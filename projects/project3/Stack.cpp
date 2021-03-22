@@ -11,7 +11,7 @@
 //DEFAULT CONSTRUCTOR
 // use the shortcut to make the head assign to the null pointer - done
 template<class ItemType>
-Stack<ItemType>::Stack() : headPtr(nullptr);
+Stack<ItemType>::Stack() : headPtr(nullptr)
 {
 }  // end default constructor
 
@@ -30,7 +30,7 @@ bool Stack<ItemType>::isEmpty() const
 {
 	if(headPtr == nullptr)
 	{
-		return true
+		return true;
 	}
 	else{
 		return true;
@@ -44,7 +44,7 @@ int Stack<ItemType>::size() const
 	return currentSize;
 }  // end size
 
-// push method 
+// push method -- Done
 template<class ItemType>
 bool Stack<ItemType>::push(const ItemType& newItem)
 {
@@ -58,12 +58,16 @@ bool Stack<ItemType>::push(const ItemType& newItem)
 	return true;
 }  // end push
 
-// TODO: Implement the peek method here
+//	peek method -- done
 template<class ItemType>
 ItemType Stack<ItemType>::peek() const
 {
-	ItemType returnItem;
-	return returnItem;
+
+	//make sure that the stack is not empty
+	assert(!isEmpty());
+	//ItemType returnItem;
+	return headPtr->getItem();
+	//return returnItem;
 }  // end peek
 
 // TODO: Implement the pop method here

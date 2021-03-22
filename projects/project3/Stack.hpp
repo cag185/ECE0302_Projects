@@ -7,6 +7,7 @@
 
 #include <stdexcept>
 #include "Node.hpp"
+#include <cassert>
 
 using namespace std;
 
