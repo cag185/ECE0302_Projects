@@ -14,10 +14,13 @@ Stack<ItemType>::Stack()
 {
 }  // end default constructor
 
-// TODO: Implement the destructor here
+// DESTRUCTOR -- done
 template<class ItemType>
 Stack<ItemType>::~Stack()
 {
+	//pop the stack until it is empty
+	while (!isEmpty())
+		pop();
 }  // end destructor
 
 // TODO: Implement the isEmpty method here
