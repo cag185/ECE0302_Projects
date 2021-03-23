@@ -74,7 +74,21 @@ ItemType Stack<ItemType>::peek() const
 template<class ItemType>
 bool Stack<ItemType>::pop() 
 {
-	return false;
+	bool result = false;
+	if(!isEmpty())
+	{
+		//the stack is not empty so return the top
+		Node<ItemType>* nodeToDeletePtr = headPtr;
+		headPtr = headPtr->getNext();
+
+		//return the deleted node
+		nodeToDeletePtr->setNext(NULL);
+		delete nodeToDeletePtr;
+		nodeToDeletePtr = NULL;
+
+		result = true;
+	}
+	return result;
 }  // end pop
 
 // TODO: Implement the clear method here
