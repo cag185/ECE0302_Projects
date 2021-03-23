@@ -57,7 +57,8 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 		switch(tempString[0])
 		{
 			case '/':
-				tagType = "END_TAG";
+				myStruct.tokenType = END_TAG;
+				//tagType = "END_TAG";
 				break;
 		}
 
@@ -74,7 +75,7 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 		}
 
 		//case of end tag
-		if(tagType == "END_TAG")
+		if(myStruct.tokenType == END_TAG)
 		{
 			int y = 1;
 			while (tempString[y] != '>' || tempString[y] != '/' || tempString[y]!= ' ')
@@ -91,6 +92,24 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 			{
 				tagName+= tempString[y];	//update tagName-- works for declaration
 			} 
+
+			//update the type of tag 
+			myStruct.tokenType = DECLARATION;
+			//tagType = "DECLARATION";
+		}
+
+		//to test if we have a start-tag vs empty-tag
+		if(tempString[tagName.length()] == '/')
+		{
+			//if the character after the end of the tag is '/'
+			//tagType = "empty tag";
+			myStruct.tokenType = EMPTY_TAG;
+		}
+		else if(tempString[tagName.length()] == '>')
+		{
+			//if the next char is a >
+			//tagType = "start tag";
+			myStruct.tokenType = START_TAG;
 		}
 
 		//make sure the tag name doesnt start with illegal characters
