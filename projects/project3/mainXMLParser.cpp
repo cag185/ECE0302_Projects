@@ -41,16 +41,16 @@ int main () {
 	}
 
 	// try to parse the tokenized input string to see if it is valid XML
-	success = myParser.parseTokenizedInput();
-	cout << endl << "parseTokenizedInput success = " << success << endl;
+	//success = myParser.parseTokenizedInput();
+	//cout << endl << "parseTokenizedInput success = " << success << endl;
 
 	// see if the element named "heading" was there
-	success = myParser.containsElementName("heading");
-	cout << endl << "contains 'heading' element success = " << success << endl;
+	//success = myParser.containsElementName("heading");
+	//cout << endl << "contains 'heading' element success = " << success << endl;
 
 	// see how many times the element named "note" was there
-	int number = myParser.frequencyElementName("note");
-	cout << endl << "contains 'note' element this many times = " << number << endl << endl;
+	//int number = myParser.frequencyElementName("note");
+	//cout << endl << "contains 'note' element this many times = " << number << endl << endl;
 
 	return 0;
 }
