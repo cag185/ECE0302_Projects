@@ -27,13 +27,24 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 	//create a temporary string to hold in the appending chars
 	string tempString;
 	string tagName;
+	string tagType;
 	//incrementing variable
 	int i = 0;
 
 	//look at the input string and systematically check for valid tokens
 	if(inputString[i] == '<')
 	{
-	i++;	//makes i the char after '<'
+		i++;	//makes i the char after '<'
+
+
+		//COULD HAVE A FEW DIFFERENT CASES
+		//START TAG --	<element>
+		//END TAG --	</element>
+		//EMPTY TAG -- 	<element/>
+		//Declaration -- <? some data ?>
+
+		//easiest to check for end tag
+		
 		//make a while loop
 		while (inputString[i]!= '>')
 		{
@@ -42,12 +53,46 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 			i++;
 		}
 		//now we have a token
-		//need to assing the tag the tag name
-		int y = 0;
-		while (tempString[y] != '>' || tempString[y] != '/' || tempString[y]!= ' ')
+		//if the token begins with '/' we know it is an end tag
+		switch(tempString[0])
 		{
-			tagName+= tempString[y];	//update tagName
-		} 
+			case '/':
+				tagType = "END_TAG";
+				break;
+		}
+
+		//case where tag is not end tag or declaration
+		if(tempString[0] == '<' && tempString[1]!= '/' && tempString[1]!= '?')		//basically rules out end tags and declarations
+		{
+			//need to assing the tag the tag name. FOR the start tag and empty tag this works but not for 
+			//declarations or end tags
+			int y = 0;
+			while (tempString[y] != '>' || tempString[y] != '/' || tempString[y]!= ' ')
+			{
+				tagName+= tempString[y];	//update tagName //	WONT WORK FOR END TAGS -- </HEAD>
+			} 
+		}
+
+		//case of end tag
+		if(tagType == "END_TAG")
+		{
+			int y = 1;
+			while (tempString[y] != '>' || tempString[y] != '/' || tempString[y]!= ' ')
+			{
+				tagName+= tempString[y];	//update tagName-- works for end tags
+			} 
+		}
+
+		//case of declaration
+		if(tempString[0]== '?')		//if we  have a declaration
+		{
+			int y = 1;
+			while (tempString[y] != '>' || tempString[y] != '/' || tempString[y]!= ' ' || tempString[y]!= '?')
+			{
+				tagName+= tempString[y];	//update tagName-- works for declaration
+			} 
+		}
+
 		//make sure the tag name doesnt start with illegal characters
 		if (tagName[0]== ' ' || tagName[0]== '-' || tagName[0] == '.')
 		{
@@ -94,6 +139,7 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 		}
 
 		//need to look through tag and make sure it doesnt contain illegal characters
+		
 		for (int a = 0; a <= tagName.length(); a++)
 		{
 			//make a char hold the character at the index
