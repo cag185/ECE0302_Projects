@@ -20,6 +20,40 @@ XMLParser::~XMLParser()
 // TODO: Implement the tokenizeInputString method
 bool XMLParser::tokenizeInputString(const std::string &inputString)
 {
+	//create an instance of the structure
+	_TokenStruct_ myStruct;
+	//create a boolean to make sure the tokens are valid
+	bool validTest = true;
+	//create a temporary string to hold in the appending chars
+	string tempString;
+	string tagName;
+	//incrementing variable
+	int i = 0;
+
+	//look at the input string and systematically check for valid tokens
+	if(inputString[i] == '<')
+	i++;	//makes i the char after '<'
+		//make a while loop
+		while (inputString[i]!= '>')
+		{
+			//append a string so that we can send it to the vector
+			tempString+= inputString[i];	//concatonnates the string at every itteration
+			i++;
+		}
+		//now we have a token
+		//need to assing the tag the tag name
+		int y = 0;
+		while (tempString[y] != '>' || tempString[y] != '/' || tempString[y]!= ' ')
+		{
+			tagName+= tempString[y];	//update tagName
+		} 
+		//make sure the tag name doesnt start with illegal characters
+		if (tagName[0]== ' ' || tagName[0]== '-' || tagName[0] == '.')
+		{
+			//invalid tag name, return false
+			return false;
+		}
+	}
 	return false;
 }  // end
 
