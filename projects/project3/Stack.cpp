@@ -75,6 +75,15 @@ ItemType Stack<ItemType>::peek() const
 	{
 		return headPtr->getItem();
 	}
+	if(isEmpty())
+	{
+		throw std::logic_error ("error1");
+	}
+	else
+	{
+		//throw std::exception ("error2");
+	}
+	return headPtr->getItem();
 	//return;
 	
 }  // end peek
