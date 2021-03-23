@@ -53,6 +53,44 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 			//invalid tag name, return false
 			return false;
 		}
+		//Switch a case statment on numbers that it cant start with
+		switch (tempString[0])
+		{
+			case '0':
+				return false;
+				break;
+			case '1':
+				return false;
+				break;
+			case '2':
+				return false;
+				break;
+			case '3':
+				return false;
+				break;
+			case '4':
+				return false;
+				break;
+			case '5':
+				return false;
+				break;
+			case '6':
+				return false;
+				break;
+			case '7':
+				return false;
+				break;
+			case '8':
+				return false;
+				break;
+			case '9':
+				return false;
+				break;
+			default:
+				//do nothing
+				break;
+
+		}
 	}
 	return false;
 }  // end
