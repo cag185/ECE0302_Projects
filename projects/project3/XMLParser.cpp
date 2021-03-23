@@ -92,6 +92,106 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 				break;
 
 		}
+
+		//need to look through tag and make sure it doesnt contain illegal characters
+		for (int a = 0; a <= tagName.length(); a++)
+		{
+			//make a char hold the character at the index
+			char ch = tagName[a];
+
+			//switch through a case statement
+			switch (ch)
+			{
+				case '!' :
+					return false;
+					break;
+				case '"' :
+					return false;
+					break;
+				case '#' :
+					return false;
+					break;
+				case '$' :
+					return false;
+					break;
+				case '%' :
+					return false;
+					break;
+				case '&' :
+					return false;
+					break;				
+				case '\'' :
+					return false;
+					break;	
+				case '(' :
+					return false;
+					break;	
+				case ')' :
+					return false;
+					break;	
+				case '*' :
+					return false;
+					break;	
+				case '+' :
+					return false;
+					break;	
+				case ',' :
+					return false;
+					break;
+				case '/' :
+					return false;
+					break;
+				case ';' :
+					return false;
+					break;
+				case '<' :
+					return false;
+					break;
+				case '=' :
+					return false;
+					break;
+				case '>' :
+					return false;
+					break;
+				case '?' :
+					return false;
+					break;
+				case '@' :
+					return false;
+					break;
+				case '[' :
+					return false;
+					break;
+				case '\\' :
+					return false;
+					break;
+				case ']' :
+					return false;
+					break;
+				case '^' :
+					return false;
+					break;
+				case '`' :
+					return false;
+					break;
+				case '{' :
+					return false;
+					break;
+				case '|' :
+					return false;
+					break;
+				case '}' :
+					return false;
+					break;
+				case '~' :
+					return false;
+					break;
+				case ' ' :
+					return false;
+					break;						
+									
+			}
+		}
 	}
 	return false;
 }  // end
