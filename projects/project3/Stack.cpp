@@ -95,7 +95,7 @@ bool Stack<ItemType>::pop()
 	return result;
 }  // end pop
 
-// TODO: Implement the clear method here
+// clear method DONE
 template<class ItemType>
 void Stack<ItemType>::clear()
 {
