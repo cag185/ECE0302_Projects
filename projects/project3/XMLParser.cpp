@@ -35,230 +35,254 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 	if(inputString[i] == '<')
 	{
 		i++;	//makes i the char after '<'
+	}
 
+	//COULD HAVE A FEW DIFFERENT CASES
+	//START TAG --	<element>
+	//END TAG --	</element>
+	//EMPTY TAG -- 	<element/>
+	//Declaration -- <? some data ?>
 
-		//COULD HAVE A FEW DIFFERENT CASES
-		//START TAG --	<element>
-		//END TAG --	</element>
-		//EMPTY TAG -- 	<element/>
-		//Declaration -- <? some data ?>
-
-		//easiest to check for end tag
+	//easiest to check for end tag
 		
-		//make a while loop
-		while (inputString[i]!= '>')
-		{
-			//append a string so that we can send it to the vector
-			tempString+= inputString[i];	//concatonnates the string at every itteration
-			i++;
-		}
-		//now we have a token
-		//if the token begins with '/' we know it is an end tag
-		switch(tempString[0])
-		{
-			case '/':
-				myStruct.tokenType = END_TAG;
-				//tagType = "END_TAG";
-				break;
-		}
+	//make a while loop
+	while (inputString[i]!= '>')
+	{
+		//append a string so that we can send it to the vector
+		tempString+= inputString[i];	//concatonnates the string at every itteration
+		i++;
+	}
+	//now we have a token
+	//if the token begins with '/' we know it is an end tag
+	switch(tempString[0])
+	{
+		case '/':
+			//myStruct.tokenType = END_TAG;
+			tagType = "END_TAG";
+			break;
+	}
 
-		//case where tag is not end tag or declaration
-		if(tempString[0] == '<' && tempString[1]!= '/' && tempString[1]!= '?')		//basically rules out end tags and declarations
+	//case where tag is not end tag or declaration
+	if(tempString[0] == '<' && tempString[1]!= '/' && tempString[1]!= '?')		//basically rules out end tags and declarations
+	{
+	//need to assing the tag the tag name. FOR the start tag and empty tag this works but not for 
+		//declarations or end tags
+		int y = 0;
+		while (tempString[y] != '>' || tempString[y] != '/' || tempString[y]!= ' ')
 		{
-			//need to assing the tag the tag name. FOR the start tag and empty tag this works but not for 
-			//declarations or end tags
-			int y = 0;
-			while (tempString[y] != '>' || tempString[y] != '/' || tempString[y]!= ' ')
-			{
-				tagName+= tempString[y];	//update tagName //	WONT WORK FOR END TAGS -- </HEAD>
-			} 
-		}
+			tagName+= tempString[y];	//update tagName //	WONT WORK FOR END TAGS -- </HEAD>
+		} 
+	}
 
-		//case of end tag
-		if(myStruct.tokenType == END_TAG)
+	//case of end tag
+	if(tagType== "END_TAG")
+	{
+		int y = 1;
+		while (tempString[y] != '>' || tempString[y] != '/' || tempString[y]!= ' ')
 		{
-			int y = 1;
-			while (tempString[y] != '>' || tempString[y] != '/' || tempString[y]!= ' ')
-			{
-				tagName+= tempString[y];	//update tagName-- works for end tags
-			} 
-		}
+			tagName+= tempString[y];	//update tagName-- works for end tags
+		} 
+	}
 
-		//case of declaration
-		if(tempString[0]== '?')		//if we  have a declaration
+	//case of declaration
+	if(tempString[0]== '?')		//if we  have a declaration
+	{
+		int y = 1;
+		while (tempString[y] != '>' || tempString[y] != '/' || tempString[y]!= ' ' || tempString[y]!= '?')
 		{
-			int y = 1;
-			while (tempString[y] != '>' || tempString[y] != '/' || tempString[y]!= ' ' || tempString[y]!= '?')
-			{
-				tagName+= tempString[y];	//update tagName-- works for declaration
-			} 
+			tagName+= tempString[y];	//update tagName-- works for declaration
+		} 
 
-			//update the type of tag 
-			myStruct.tokenType = DECLARATION;
-			//tagType = "DECLARATION";
-		}
+		//update the type of tag 
+		//myStruct.tokenType = DECLARATION;
+		tagType = "DECLARATION";
+	}
 
-		//to test if we have a start-tag vs empty-tag
-		if(tempString[tagName.length()] == '/')
-		{
-			//if the character after the end of the tag is '/'
-			//tagType = "empty tag";
-			myStruct.tokenType = EMPTY_TAG;
-		}
-		else if(tempString[tagName.length()] == '>')
-		{
-			//if the next char is a >
-			//tagType = "start tag";
-			myStruct.tokenType = START_TAG;
-		}
+	//to test if we have a start-tag vs empty-tag
+	if(tempString[tagName.length()] == '/')
+	{
+		//if the character after the end of the tag is '/'
+		tagType = "EMPTY_TAG	";
+		//myStruct.tokenType = EMPTY_TAG;
+	}
+	else if(tempString[tagName.length()] == '>')
+	{
+		//if the next char is a >
+		tagType = "START_TAG";
+		//myStruct.tokenType = START_TAG;
+	}
 
-		//make sure the tag name doesnt start with illegal characters
-		if (tagName[0]== ' ' || tagName[0]== '-' || tagName[0] == '.')
-		{
-			//invalid tag name, return false
+	//make sure the tag name doesnt start with illegal characters
+	if (tagName[0]== ' ' || tagName[0]== '-' || tagName[0] == '.')
+	{
+		//invalid tag name, return false
+		return false;
+	}
+	//Switch a case statment on numbers that it cant start with
+	switch (tempString[0])
+	{
+		case '0':
 			return false;
-		}
-		//Switch a case statment on numbers that it cant start with
-		switch (tempString[0])
-		{
-			case '0':
-				return false;
-				break;
-			case '1':
-				return false;
-				break;
-			case '2':
-				return false;
-				break;
-			case '3':
-				return false;
-				break;
-			case '4':
-				return false;
-				break;
-			case '5':
-				return false;
-				break;
-			case '6':
-				return false;
-				break;
-			case '7':
-				return false;
-				break;
-			case '8':
-				return false;
-				break;
-			case '9':
-				return false;
-				break;
-			default:
-				//do nothing
-				break;
+			break;
+		case '1':
+			return false;
+			break;
+		case '2':
+			return false;
+			break;
+		case '3':
+			return false;
+			break;
+		case '4':
+			return false;
+			break;
+		case '5':
+			return false;
+			break;
+		case '6':
+			return false;
+			break;
+		case '7':
+			return false;
+			break;
+		case '8':
+			return false;
+			break;
+		case '9':
+			return false;
+			break;
+		default:
+			//do nothing
+			break;
+	}
 
-		}
-
-		//need to look through tag and make sure it doesnt contain illegal characters
+	//need to look through tag and make sure it doesnt contain illegal characters
 		
-		for (int a = 0; a <= tagName.length(); a++)
-		{
-			//make a char hold the character at the index
-			char ch = tagName[a];
+	for (int a = 0; a <= tagName.length(); a++)
+	{
+		//make a char hold the character at the index
+		char ch = tagName[a];
 
-			//switch through a case statement
-			switch (ch)
-			{
-				case '!' :
-					return false;
-					break;
-				case '"' :
-					return false;
-					break;
-				case '#' :
-					return false;
-					break;
-				case '$' :
-					return false;
-					break;
-				case '%' :
-					return false;
-					break;
-				case '&' :
-					return false;
-					break;				
-				case '\'' :
-					return false;
-					break;	
-				case '(' :
-					return false;
-					break;	
-				case ')' :
-					return false;
-					break;	
-				case '*' :
-					return false;
-					break;	
-				case '+' :
-					return false;
-					break;	
-				case ',' :
-					return false;
-					break;
-				case '/' :
-					return false;
-					break;
-				case ';' :
-					return false;
-					break;
-				case '<' :
-					return false;
-					break;
-				case '=' :
-					return false;
-					break;
-				case '>' :
-					return false;
-					break;
-				case '?' :
-					return false;
-					break;
-				case '@' :
-					return false;
-					break;
-				case '[' :
-					return false;
-					break;
-				case '\\' :
-					return false;
-					break;
-				case ']' :
-					return false;
-					break;
-				case '^' :
-					return false;
-					break;
-				case '`' :
-					return false;
-					break;
-				case '{' :
-					return false;
-					break;
-				case '|' :
-					return false;
-					break;
-				case '}' :
-					return false;
-					break;
-				case '~' :
-					return false;
-					break;
-				case ' ' :
-					return false;
-					break;						
-									
-			}
+		//switch through a case statement
+		switch (ch)
+		{
+			case '!' :
+				return false;
+				break;
+			case '"' :
+				return false;
+				break;
+			case '#' :
+				return false;
+				break;
+			case '$' :
+				return false;
+				break;
+			case '%' :
+				return false;
+				break;
+			case '&' :
+				return false;
+				break;				
+			case '\'' :
+				return false;
+				break;	
+			case '(' :
+				return false;
+				break;	
+			case ')' :
+				return false;
+				break;	
+			case '*' :
+				return false;
+				break;	
+			case '+' :
+				return false;
+				break;	
+			case ',' :
+				return false;
+				break;
+			case '/' :
+				return false;
+				break;
+			case ';' :
+				return false;
+				break;
+			case '<' :
+				return false;
+				break;
+			case '=' :
+				return false;
+				break;
+			case '>' :
+				return false;
+				break;
+			case '?' :
+				return false;
+				break;
+			case '@' :
+				return false;
+				break;
+			case '[' :
+				return false;
+				break;
+			case '\\' :
+				return false;
+				break;
+			case ']' :
+				return false;
+				break;
+			case '^' :
+				return false;
+				break;
+			case '`' :
+				return false;
+				break;
+			case '{' :
+				return false;
+				break;
+			case '|' :
+				return false;
+				break;
+			case '}' :
+				return false;
+				break;
+			case '~' :
+				return false;
+				break;
+			case ' ' :
+				return false;
+				break;						
+								
 		}
-	} 
-	return false;
+	}
+	//at this point, the tag should be valid in its own (not counting its repeated tag) 
+	//if content is blank, dont add as a token
+	//no two angle brackets in a row
+	//need to define the type and send the tagName
+
+	if(tagType == "END_TAG")
+	{
+		myStruct.tokenType = END_TAG;
+	}
+	else if (tagType == "START_TAG")
+	{
+		myStruct.tokenType = START_TAG;
+	}
+	else if(tagType == "EMPTY_TAG")
+	{
+		myStruct.tokenType = EMPTY_TAG;
+	}
+	else if (tagType == "DECLARATION")
+	{
+		myStruct.tokenType = DECLARATION;
+	}
+	
+
+	//also need to send the name of the tag
+	myStruct.tokenString = tagName;
+
+	return true;
 }  // end
 
 // TODO: Implement a helper function to delete attributes from a START_TAG
