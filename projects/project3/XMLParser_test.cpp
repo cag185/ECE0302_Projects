@@ -23,7 +23,7 @@ TEST_CASE( "Test Bag add", "[XMLParser]" )
 			success = (bagSize == (i+1));
 			REQUIRE(success);
 		}
-}
+} 
 
 TEST_CASE( "Test Stack push", "[XMLParser]" )
 {
@@ -35,14 +35,16 @@ TEST_CASE( "Test Stack push", "[XMLParser]" )
 		bool success;
 		for (int i=0; i<testSize; i++) {
 			success = intStack.push(i);
-			REQUIRE(success);
+			std::cout << success << std::endl;
+			REQUIRE(success==true);
 			stackSize = intStack.size();
+			std::cout << "stack size " << stackSize << std::endl; 
 			success = (stackSize == (i+1));
 			REQUIRE(success);
 		}
-}
+} 
 
-TEST_CASE( "Test XMLParser tokenizeInputString", "[XMLParser]" )
+/*TEST_CASE( "Test XMLParser tokenizeInputString", "[XMLParser]" )
 {
 	   INFO("Hint: tokenize single element test of XMLParse");
 		// Create an instance of XMLParse
@@ -51,5 +53,5 @@ TEST_CASE( "Test XMLParser tokenizeInputString", "[XMLParser]" )
 		bool success;
 		success = myXMLParser.tokenizeInputString(testString);
 		REQUIRE(success);
-}
+} */
 

@@ -28,14 +28,7 @@ Stack<ItemType>::~Stack()
 template<class ItemType>
 bool Stack<ItemType>::isEmpty() const
 {
-	if(headPtr == nullptr)
-	{
-		return true;
-	}
-	else
-	{
-		return true;
-	}
+	return headPtr == nullptr;
 }  // end isEmpty
 
 // Size method -- Done
@@ -52,7 +45,7 @@ bool Stack<ItemType>::push(const ItemType& newItem)
 	//need to add a value via a node
 	Node<ItemType> * newNodePtr = new Node <ItemType> (newItem, headPtr);
 	headPtr = newNodePtr;
-	newNodePtr = NULL;
+	newNodePtr = nullptr;
 
 	//increase the current size variable
 	currentSize++;
@@ -65,10 +58,25 @@ ItemType Stack<ItemType>::peek() const
 {
 
 	//make sure that the stack is not empty
-	assert(!isEmpty());
+	//assert(!isEmpty());
+	//int i = 0;
+	//Node<ItemType> * tempNode = new Node <ItemType>;
+	//tempNode = headPtr;
+	//while (i <= currentSize )
+	//{
+	//	tempNode = tempNode->getNext();	//get the next node
+	//}
 	//ItemType returnItem;
-	return headPtr->getItem();
+	//ItemType returnItem = tempNode->getItem();
+	//delete the pointer
+	//delete tempNode;
 	//return returnItem;
+	if (!isEmpty())
+	{
+		return headPtr->getItem();
+	}
+	//return;
+	
 }  // end peek
 
 // pop method -- DONE
@@ -83,9 +91,9 @@ bool Stack<ItemType>::pop()
 		headPtr = headPtr->getNext();
 
 		//return the deleted node
-		nodeToDeletePtr->setNext(NULL);
+		nodeToDeletePtr->setNext(nullptr);
 		delete nodeToDeletePtr;
-		nodeToDeletePtr = NULL;
+		nodeToDeletePtr = nullptr;
 
 		result = true;
 
@@ -113,7 +121,7 @@ void Stack<ItemType>::clear()
 		delete headPtr;
 		//reassign the head
 		headPtr = NodePtr;
-		currentSize--;
 	}
+	currentSize = 0;
 }  // end clear
 
