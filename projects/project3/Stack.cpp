@@ -32,7 +32,8 @@ bool Stack<ItemType>::isEmpty() const
 	{
 		return true;
 	}
-	else{
+	else
+	{
 		return true;
 	}
 }  // end isEmpty
@@ -70,7 +71,7 @@ ItemType Stack<ItemType>::peek() const
 	//return returnItem;
 }  // end peek
 
-// TODO: Implement the pop method here
+// pop method -- DONE
 template<class ItemType>
 bool Stack<ItemType>::pop() 
 {
@@ -87,6 +88,9 @@ bool Stack<ItemType>::pop()
 		nodeToDeletePtr = NULL;
 
 		result = true;
+
+		//reduce size
+		currentSize--;
 	}
 	return result;
 }  // end pop
@@ -95,5 +99,21 @@ bool Stack<ItemType>::pop()
 template<class ItemType>
 void Stack<ItemType>::clear()
 {
+	//create a pointer to the head
+	Node<ItemType> * NodePtr = headPtr;
+
+	//loop until the next pointer is NULL
+	while (NodePtr != NULL)
+	{
+		//assign to head
+		NodePtr = headPtr;	
+		//move one more
+		NodePtr = NodePtr->getNext();
+		//delete the head
+		delete headPtr;
+		//reassign the head
+		headPtr = NodePtr;
+		currentSize--;
+	}
 }  // end clear
 
