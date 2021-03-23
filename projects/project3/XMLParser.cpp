@@ -192,7 +192,7 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 									
 			}
 		}
-	}
+	} 
 	return false;
 }  // end
 
