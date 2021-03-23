@@ -32,6 +32,7 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 
 	//look at the input string and systematically check for valid tokens
 	if(inputString[i] == '<')
+	{
 	i++;	//makes i the char after '<'
 		//make a while loop
 		while (inputString[i]!= '>')
