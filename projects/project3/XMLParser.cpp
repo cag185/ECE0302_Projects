@@ -43,9 +43,10 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 		//check for the start of a tag
 		if(inputString[cursor] == '<')
 		{
+			
 			a= cursor + 1;
 			//check validity
-			while (inputString[cursor] != '>' )
+			while (inputString[cursor] != '>')
 			{
 				while(inputString[a] != '>')
 				{
@@ -54,17 +55,8 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 					//increase a
 					a++;
 				}
-				//need to update cursor, but sometimes next char is \n
-				std::cout << "TempString: " << tempString << std::endl;
 				
-				if(isspace(inputString[cursor+1]))
-				{
-					cursor ++;
-				}
-				else
-				{
-					//cursor++;	//moves cursor to the position after closing bracket
-				}
+				std::cout << "TempString: " << tempString << std::endl;
 				std:: cout << "The pos of the cursor: " << cursor << std::endl;
 				std::cout << "The char at the cursor: " << inputString[cursor] << std::endl;
 				std::cout << "this is the potential tag" << std::endl;
@@ -128,9 +120,9 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 					tagType = "START_TAG";
 					test = true;
 					//tag should defualt to a start tag -- still have to test if valid
-					//tagName = tempString;
+					tagName = tempString;
 					//testing for correct output
-					std::cout << tagName << std::endl;
+					//std::cout << tagName << std::endl;
 					std::cout << "Tag Type: " << tagType << std::endl;
 				}
 
@@ -323,15 +315,19 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 				std::cout << "test" << std::endl;
 				tokenizedInputVector.push_back(myStruct);
 				std:: cout << "successfully pushed back to vector" << std:: endl;
-			}
+				cursor = tempString.length()+1;
+			}	//when this loop breaks, cursor is at >
 			std::cout << "We have broken out of the loop" << std::endl;
+			
+			
 		}
 
 		//CONTENT
 		//if the characters are a part of content instead of normal tags
-		/*if(inputString[cursor] != '<' && inputString[cursor] != '>')
+		if(inputString[cursor] != '<' && inputString[cursor] != '>')
 		{
-			a = cursor;
+			std::cout << "Cursor is not at '<' " << std::endl;
+			/*a = cursor;
 			while (inputString[a] != '<')
 			{
 				tagName += inputString[a];	//make tag name equal the content
@@ -357,10 +353,17 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 				//need to push the structure to the vector
 				tokenizedInputVector.push_back(myStruct);
 				std:: cout << "successfully pushed back to vector" << std:: endl;
-			}	
-		} */
+			}	*/
+		} 
 		//AT END OF EACH ITTERATION
-		cursor++;
+		//move the cursor to spot after >
+		//cursor ++;	//may be issues with \n
+		std::cout << "the cursor is now at: " << inputString[cursor] << std::endl;
+		if(isspace(inputString[cursor]))
+		{
+			cursor++;
+			std::cout << "the cursor is now at: " << inputString[cursor] << std::endl;
+		}
 	}
 	return true;
 }  // end
