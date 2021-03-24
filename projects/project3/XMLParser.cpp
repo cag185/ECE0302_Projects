@@ -36,7 +36,7 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 	bool test = false;
 	//loop from the start of the string to the end of the string
 	std:: cout << "The length of the string is : " << inputString.length() << std::endl;
-	while(cursor < inputString.length())
+	while(cursor < inputString.length()-1)
 	{
 		//clear the strings
 		tempString = "";
@@ -80,7 +80,7 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 						tagName+= tempString[j];	//fixes tagName
 					}
 					//testing for correct output
-					std::cout << tagName << std::endl;
+					std::cout << "TagName: " << tagName << std::endl;
 				}
 				//Empty tag -- determines type of token and token name
 				else if(tempString[tempString.length()-1] == '/' )	//last character 
@@ -126,10 +126,14 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 					//tag should defualt to a start tag -- still have to test if valid
 					//tagName = tempString;
 					int j = 0;
-					while(tempString[j]!= ' ' && tempString[j]!= '>' && j < tempString.length())
+					while(tempString[j]!= '>' && j < tempString.length())
 					{
 						tagName+=tempString[j];
 						j++;
+						if(tempString[j]== ' ')
+						{
+							break;
+						}
 					}
 					//testing for correct output
 					//std::cout << tagName << std::endl;
@@ -369,6 +373,7 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 		if(inputString[cursor] != '<' && inputString[cursor] != '>')
 		{
 			std::cout << "Cursor is not at '<' " << std::endl;
+			std::cout << "We think this is a Content" << std::endl;
 			
 			while (inputString[cursor] != '<')
 			{
@@ -392,6 +397,7 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 				//we can make this tag a tag
 				myStruct.tokenString = tagName;
 				myStruct.tokenType = CONTENT;
+			
 
 				//need to push the structure to the vector
 				tokenizedInputVector.push_back(myStruct);
@@ -401,9 +407,13 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 		//AT END OF EACH ITTERATION
 		//move the cursor to spot after >
 		std::cout << "we have incremented cursor" << std::endl;
-		cursor ++;	//may be issues with \n
-		buffer++;
+		if(myStruct.tokenType != CONTENT)
+		{
+			cursor++;
+		}
+		
 		//strLengthTrack+= " ";
+		//cursor++;
 		std::cout << "the cursor is now at: " << inputString[cursor] << std::endl;
 		if(isspace(inputString[cursor]))
 		{
