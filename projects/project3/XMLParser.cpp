@@ -32,11 +32,11 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 		//check for the start of a tag
 		if(inputString[i] == '<')
 		{
-			//start = i + 1;
+			a= i + 1;
 			//check validity
 			while (inputString[a] != '>')
 			{
-				tagName += inputString[a]; //adds the chars between < and > to tagName
+				tempString += inputString[a]; //adds the chars between < and > to tempString
 				//increase a
 				a++;
 			}
@@ -45,40 +45,84 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 			//MAKE SURE IT DOES NOT CONTAIN ILLEGAL CHARACTERS
 			//check for tag type
 
-			//End tag
-			if(tagName[0] == '/')
+			//End tag -- determines type of token and token name
+			if(tempString[0] == '/')
 			{
 				tagType = "END_TAG";
+				for(int j  = 1; j < tempString.length(); j++)
+				{
+					tagName+= tempString[j];	//fixes tagName
+				}
 			}
-
-			//Empty tag
-			if(tagName[tagName.length()-1] == '/' )	//last character 
+			//Empty tag -- determines type of token and token name
+			else if(tempString[tempString.length()-1] == '/' )	//last character 
 			{
 				tagType = "EMPTY_TAG";
 				//copy the string until the last elements
-				string temp;
-				for(int j  = 0; j < tagName.length()-1; j++)
+				for(int j  = 0; j < tempString.length()-1; j++)
 				{
-					temp[j] = tagName[j];
+					tagName+=  tempString[j];
 				}
-				//remake tagName
-				tagName = temp;
+				
 			}
-
-			//Declaration
-			if(tagName[0]== '?' && tagName[tagName.length()-1] == '?')
+			//Declaration -- determines type of token and token name
+			else if(tempString[0]== '?' && tempString[tempString.length()-1] == '?')
 			//first element and last element are ?
 			{
 				tagType = "DECLARATION";
 				//copy the tag name minus the ?
-				string temp;
-				for(int j = 1; j < tagName.length()-1; j++ )
+			
+				for(int j = 1; j < tempString.length()-1; j++ )
 				{
-					temp[j-1] = tagName[j]; // copies the shortend string to temp
+					tagName+= tempString[j]; // copies the shortend string to tagName
 				}
-				tagName = temp;
+				
+			}
+			//Start tag
+			else
+			{
+				//tag should defualt to a start tag -- still have to test if valid
+				int j = 0;
+				while (tempString[j] != ' ' && tempString[j] != '/')
+				{
+					tagName += tempString[j];
+				}
+			}
+			//from here we know that the tag is a type of a certain tag and we also 
+			//know the name of the tag
+			//need to run the tag through the various tests
+		}
+
+		//if the characters are a part of content instead of normal tags
+		if(inputString[i] == '>')
+		{
+			a = i+1;
+			while (inputString[a] != '<')
+			{
+				tagName += inputString[a];	//make tag name equal the content
+			}
+			
+			//keep adding to tag
+			//after tag name is compelete, design a test to make sure it is not all white space
+			//if its good, allow it to store in the vector and make the type 'content'
+			int tempInt = tagName.length();
+			int numSpace = 0;
+			for (int b = 0; b < tempInt; b++)
+			{
+				if(isspace(tagName[b]))
+					numSpace++;
+			}
+			if(numSpace < tempInt)
+			{
+				//we can make this tag a tag
+				myStruct.tokenString = tagName;
+				myStruct.tokenType = CONTENT;
+
 			}
 		}
+		//AT END OF EACH ITTERATION
+		//need to push the structure to the vector
+		tokenizedInputVector.push_back(myStruct);
 	}
 
 
