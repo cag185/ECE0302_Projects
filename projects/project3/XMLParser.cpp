@@ -124,10 +124,17 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 					tagType = "START_TAG";
 					test = true;
 					//tag should defualt to a start tag -- still have to test if valid
-					tagName = tempString;
+					//tagName = tempString;
+					int j = 0;
+					while(tempString[j]!= ' ' && tempString[j]!= '>' && j < tempString.length())
+					{
+						tagName+=tempString[j];
+						j++;
+					}
 					//testing for correct output
 					//std::cout << tagName << std::endl;
 					std::cout << "Tag Type: " << tagType << std::endl;
+					std::cout << "Tag Size: " << tagName.length() << std::endl;
 				}
 
 				//update the token name and token type
@@ -211,8 +218,11 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 					//std::cout << "Tag: " << tagType << std:: endl;
 					//need to look through tag and make sure it doesnt contain illegal characters
 					
+
+					
 					for (int a = 0; a < tagName.length()-1; a++)
 					{
+						
 						//make a char hold the character at the index
 						char ch = tagName[a];
 
@@ -220,6 +230,7 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 						switch (ch)
 						{
 							case '!' :
+								
 								return false;
 								break;
 							case '"' :
@@ -304,6 +315,7 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 								return false;
 								break;
 							case ' ' :
+								
 								return false;
 								break;						
 							default:
