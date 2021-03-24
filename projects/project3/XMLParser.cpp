@@ -10,11 +10,14 @@
 // TODO: Implement the constructor here 
 XMLParser::XMLParser()
 {
+	elementNameBag= new Bag<std::string>;
+	parseStack = new Stack<std::string>;
 }  // end default constructor
 
 // TODO: Implement the destructor here
 XMLParser::~XMLParser()
 {
+	clear();
 }  // end destructor
 
 // TODO: Implement the tokenizeInputString method
@@ -437,7 +440,52 @@ static std::string deleteAttributes(std::string input)
 // TODO: Implement the parseTokenizedInput method here
 bool XMLParser::parseTokenizedInput()
 {
-	return false;
+	//create an instance of tokenStruct
+	_TokenStruct_ vecStruct;
+	//boolean flag for finding search
+	bool found = false;
+	//tempString
+	string tempString;
+	string peekString;
+
+	//std::cout << "We got this far" << std::endl;
+	//loop through all elements in the vector
+	for(int i = 0; i < tokenizedInputVector.size(); i++)
+	{
+		//assign vecStruct from tokenVec
+		vecStruct = tokenizedInputVector.at(i);
+		//assign string
+		tempString = vecStruct.tokenString;
+		//std::cout << "should see this 16 times" << std::endl;
+		if(vecStruct.tokenType == 1 )	//token type is a start tag
+		{
+			//push into stack
+			parseStack->push(tempString);
+			//check to see if we pushed
+		}
+
+		if(vecStruct.tokenType == 2)
+		{
+			peekString = parseStack->peek();
+			if(peekString != tempString)
+			{
+				//return false. something went wrong
+				return false;
+			}
+			else if (peekString == tempString)
+			{
+
+				elementNameBag->add(tempString);
+				parseStack->pop();	//remove the top element, repeat
+			}
+		}
+		//in the case of empty tags
+		if(vecStruct.tokenType == 3)
+		{
+			elementNameBag->add(tempString);
+		}
+	}
+	return true;
 }
 
 // TODO: Implement the clear method here

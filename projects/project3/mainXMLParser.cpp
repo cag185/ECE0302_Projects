@@ -41,8 +41,8 @@ int main () {
 	}
 
 	// try to parse the tokenized input string to see if it is valid XML
-	//success = myParser.parseTokenizedInput();
-	//cout << endl << "parseTokenizedInput success = " << success << endl;
+	success = myParser.parseTokenizedInput();
+	cout << endl << "parseTokenizedInput success = " << success << endl;
 
 	// see if the element named "heading" was there
 	//success = myParser.containsElementName("heading");
