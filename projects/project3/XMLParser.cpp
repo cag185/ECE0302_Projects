@@ -28,7 +28,10 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 	string tempString, tagName, decTagName, tagType, strLengthTrack;
 	//int to start and stop tag
 	int start, stop, a;
+	
 	int cursor = 0;
+	int buffer = 0;
+	int alpha = 0;
 	//variable to determine if the tag should be tested or not
 	bool test = false;
 	//loop from the start of the string to the end of the string
@@ -52,6 +55,7 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 				{
 					tempString += inputString[a]; //adds the chars between < and > to tempString
 					strLengthTrack += inputString[a]; // used for tracking
+					cursor++;
 					//increase a
 					a++;
 				}
@@ -315,9 +319,35 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 				std::cout << "test" << std::endl;
 				tokenizedInputVector.push_back(myStruct);
 				std:: cout << "successfully pushed back to vector" << std:: endl;
-				cursor = tempString.length()+1;
+				if(tagType== "DECLARATION")
+				{
+					//cursor = strLengthTrack.length()+1;
+					cursor++;
+					buffer = 4;
+					//also increase strLength track by 4
+					//strLengthTrack += "    ";
+				}
+				else if (tagType == "START_TAG")
+				{
+					cursor++;
+					//cursor = strLengthTrack.length()+buffer;
+				}
+				else if(tagType == "EMPTY_TAG")
+				{
+					cursor++;
+				}
+				else if (tagType == "END_TAG")
+				{
+					cursor++;
+				}
+				std::cout << "the position of the cursor after success: " << cursor << std::endl;
 			}	//when this loop breaks, cursor is at >
 			std::cout << "We have broken out of the loop" << std::endl;
+			alpha++;
+			//if(alpha == 2)
+			//{
+			//	break;
+			//}
 			
 			
 		}
@@ -327,10 +357,11 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 		if(inputString[cursor] != '<' && inputString[cursor] != '>')
 		{
 			std::cout << "Cursor is not at '<' " << std::endl;
-			/*a = cursor;
-			while (inputString[a] != '<')
+			
+			while (inputString[cursor] != '<')
 			{
-				tagName += inputString[a];	//make tag name equal the content
+				tagName += inputString[cursor];	//make tag name equal the content
+				cursor++;
 			}
 			//testing for correct output
 				std::cout << tagName << std::endl;
@@ -353,15 +384,21 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 				//need to push the structure to the vector
 				tokenizedInputVector.push_back(myStruct);
 				std:: cout << "successfully pushed back to vector" << std:: endl;
-			}	*/
+			}	
 		} 
 		//AT END OF EACH ITTERATION
 		//move the cursor to spot after >
-		//cursor ++;	//may be issues with \n
+		std::cout << "we have incremented cursor" << std::endl;
+		cursor ++;	//may be issues with \n
+		buffer++;
+		//strLengthTrack+= " ";
 		std::cout << "the cursor is now at: " << inputString[cursor] << std::endl;
 		if(isspace(inputString[cursor]))
 		{
+			//have to increase the string size
+			//strLengthTrack+=" ";
 			cursor++;
+			buffer++;
 			std::cout << "the cursor is now at: " << inputString[cursor] << std::endl;
 		}
 	}
