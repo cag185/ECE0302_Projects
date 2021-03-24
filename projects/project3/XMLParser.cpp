@@ -91,6 +91,178 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 			//from here we know that the tag is a type of a certain tag and we also 
 			//know the name of the tag
 			//need to run the tag through the various tests
+
+			//NEED TO MAKE SURE THE TAG DOESNT START WITH ILLEGAL CHARACTERS
+			if (tagName[0]== ' ' || tagName[0]== '-' || tagName[0] == '.')
+			{
+				//invalid tag name, return false
+				return false;
+			}
+			//Switch a case statment on numbers that it cant start with
+			switch (tagName[0])
+			{
+				case '0':
+					return false;
+					break;
+				case '1':
+					return false;
+					break;
+				case '2':
+					return false;
+					break;
+				case '3':
+					return false;
+					break;
+				case '4':
+					return false;
+					break;
+				case '5':
+					return false;
+					break;
+				case '6':
+					return false;
+					break;
+				case '7':
+					return false;
+					break;
+				case '8':
+					return false;
+					break;
+				case '9':
+					return false;
+					break;
+				default:
+					//do nothing
+					break;
+			}
+
+			//NEED TO MAKE SURE THE NORMAL TAGNAMES DONT CONTAIN WEIRD CHARACTERS (not including content tag)
+			
+			//need to look through tag and make sure it doesnt contain illegal characters
+
+			for (int a = 0; a < tagName.length(); a++)
+			{
+				//make a char hold the character at the index
+				char ch = tagName[a];
+
+				//switch through a case statement
+				switch (ch)
+				{
+					case '!' :
+						return false;
+						break;
+					case '"' :
+						return false;
+						break;
+					case '#' :
+						return false;
+						break;
+					case '$' :
+						return false;
+						break;
+					case '%' :
+						return false;
+						break;
+					case '&' :
+						return false;
+						break;				
+					case '\'' :
+						return false;
+						break;	
+					case '(' :
+						return false;
+						break;	
+					case ')' :
+						return false;
+						break;	
+					case '*' :
+						return false;
+						break;	
+					case '+' :
+						return false;
+						break;	
+					case ',' :
+						return false;
+						break;
+					case '/' :
+						return false;
+						break;
+					case ';' :
+						return false;
+						break;
+					case '<' :
+						return false;
+						break;
+					case '=' :
+						return false;
+						break;
+					case '>' :
+						return false;
+						break;
+					case '?' :
+						return false;
+						break;
+					case '@' :
+						return false;
+						break;
+					case '[' :
+						return false;
+						break;
+					case '\\' :
+						return false;
+						break;
+					case ']' :
+						return false;
+						break;
+					case '^' :
+						return false;
+						break;
+					case '`' :
+						return false;
+						break;
+					case '{' :
+						return false;
+						break;
+					case '|' :
+						return false;
+						break;
+					case '}' :
+						return false;
+						break;
+					case '~' :
+						return false;
+						break;
+					case ' ' :
+						return false;
+						break;						
+
+				}
+			}
+
+				if(tagType == "END_TAG")
+			{
+				myStruct.tokenType = END_TAG;
+			}
+			else if (tagType == "START_TAG")
+			{
+				myStruct.tokenType = START_TAG;
+			}
+			else if(tagType == "EMPTY_TAG")
+			{
+				myStruct.tokenType = EMPTY_TAG;
+			}
+			else if (tagType == "DECLARATION")
+			{
+				myStruct.tokenType = DECLARATION;
+			}
+			else
+			{
+				return false;
+			}
+			//also need to send the name of the tag
+			myStruct.tokenString = tagName;
+			//push the structure to the vector
+			tokenizedInputVector.push_back(myStruct);
 		}
 
 		//if the characters are a part of content instead of normal tags
@@ -118,11 +290,12 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 				myStruct.tokenString = tagName;
 				myStruct.tokenType = CONTENT;
 
+				//need to push the structure to the vector
+				tokenizedInputVector.push_back(myStruct);
 			}
 		}
 		//AT END OF EACH ITTERATION
-		//need to push the structure to the vector
-		tokenizedInputVector.push_back(myStruct);
+		
 	}
 
 
