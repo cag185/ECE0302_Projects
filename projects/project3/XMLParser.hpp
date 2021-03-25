@@ -28,10 +28,17 @@ private:
 	Stack<std::string>* parseStack;
 	/** Vector to store the tokenized input string and the token types */
 	std::vector<TokenStruct> tokenizedInputVector;
+	
   
   // You can add or change the private fields.
 
 public:
+
+	//variables
+	//flags for parse and tokenize
+	bool Tokenize, Parse = false;
+
+	
 	/** The class constructor.
 		@post  Creates an instance of the class that can be used to tokenize and parse an input string . */
 	XMLParser();

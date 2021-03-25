@@ -17,14 +17,14 @@ XMLParser::XMLParser()
 // TODO: Implement the destructor here
 XMLParser::~XMLParser()
 {
+	Tokenize, Parse = false;
 	clear();
 }  // end destructor
 
 // TODO: Implement the tokenizeInputString method
 bool XMLParser::tokenizeInputString(const std::string &inputString)
 {
-	//std:: cout << "this is char at 39: " << std:: endl;
-	//std::cout << inputString[39] << std::endl;
+	
 	//create and instance of the structure
 	TokenStruct myStruct;
 	//create strings to help later
@@ -64,10 +64,7 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 				}
 				
 				std::cout << "TempString: " << tempString << std::endl;
-				std:: cout << "The pos of the cursor: " << cursor << std::endl;
-				std::cout << "The char at the cursor: " << inputString[cursor] << std::endl;
-				std::cout << "this is the potential tag" << std::endl;
-				std::cout << tempString << std::endl;
+				std::cout << "this is the potential tag: " << tempString <<  std::endl;
 				//now that we gave a potential tag, check to see if it is valid
 				//SEE WHAT TYPE OF TAG IT IS
 				//MAKE SURE IT DOES NOT CONTAIN ILLEGAL CHARACTERS
@@ -96,7 +93,7 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 						tagName+=  tempString[j];
 					}
 					//testing for correct output
-					std::cout << tagName << std::endl;
+					std::cout << "Tagname: " << tagName << std::endl;
 				}
 				//Declaration -- determines type of token and token name
 				else if(tempString[0]== '?' && tempString[tempString.length()-1] == '?')
@@ -119,7 +116,7 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 						tagName+= tempString[j]; // copies the shortend string to tagName
 					}
 					//testing for correct output
-					std::cout << tagName << std::endl;
+					std::cout << "Tagname: " <<tagName << std::endl;
 				}
 				//Start tag
 				else
@@ -139,9 +136,7 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 						}
 					}
 					//testing for correct output
-					//std::cout << tagName << std::endl;
 					std::cout << "Tag Type: " << tagType << std::endl;
-					std::cout << "Tag Size: " << tagName.length() << std::endl;
 				}
 
 				//update the token name and token type
@@ -222,7 +217,6 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 
 					//NEED TO MAKE SURE THE NORMAL TAGNAMES DONT CONTAIN WEIRD CHARACTERS (not including content tag)
 					//print of what the tags are
-					//std::cout << "Tag: " << tagType << std:: endl;
 					//need to look through tag and make sure it doesnt contain illegal characters
 					
 
@@ -329,13 +323,10 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 								//do nothing
 								break;
 						}
-						//std::cout << "test again a: " << a <<  std::endl;
 					}
-					std:: cout << "there are no illegal characters" << std:: endl;
 				}
 				//need to update the vector here and in the content section
 				//push the structure to the vector
-				std::cout << "test" << std::endl;
 				tokenizedInputVector.push_back(myStruct);
 				std:: cout << "successfully pushed back to vector" << std:: endl;
 				if(tagType== "DECLARATION")
@@ -359,9 +350,7 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 				{
 					cursor++;
 				}
-				std::cout << "the position of the cursor after success: " << cursor << std::endl;
 			}	//when this loop breaks, cursor is at >
-			std::cout << "We have broken out of the loop" << std::endl;
 			alpha++;
 			//if(alpha == 2)
 			//{
@@ -375,8 +364,6 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 		//if the characters are a part of content instead of normal tags
 		if(inputString[cursor] != '<' && inputString[cursor] != '>')
 		{
-			std::cout << "Cursor is not at '<' " << std::endl;
-			std::cout << "We think this is a Content" << std::endl;
 			
 			while (inputString[cursor] != '<')
 			{
@@ -384,7 +371,7 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 				cursor++;
 			}
 			//testing for correct output
-				std::cout << tagName << std::endl;
+				std::cout << "Tagname: " << tagName << std::endl;
 			//keep adding to tag
 			//after tag name is compelete, design a test to make sure it is not all white space
 			//if its good, allow it to store in the vector and make the type 'content'
@@ -409,7 +396,6 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 		} 
 		//AT END OF EACH ITTERATION
 		//move the cursor to spot after >
-		std::cout << "we have incremented cursor" << std::endl;
 		if(myStruct.tokenType != CONTENT)
 		{
 			cursor++;
@@ -417,16 +403,15 @@ bool XMLParser::tokenizeInputString(const std::string &inputString)
 		
 		//strLengthTrack+= " ";
 		//cursor++;
-		std::cout << "the cursor is now at: " << inputString[cursor] << std::endl;
 		if(isspace(inputString[cursor]))
 		{
 			//have to increase the string size
 			//strLengthTrack+=" ";
 			cursor++;
 			buffer++;
-			std::cout << "the cursor is now at: " << inputString[cursor] << std::endl;
 		}
 	}
+	Tokenize = true;
 	return true;
 }  // end
 
@@ -437,7 +422,7 @@ static std::string deleteAttributes(std::string input)
 	return input;
 }
 
-// TODO: Implement the parseTokenizedInput method here
+// parseTokenizedInput method 
 bool XMLParser::parseTokenizedInput()
 {
 	//create an instance of tokenStruct
@@ -448,7 +433,6 @@ bool XMLParser::parseTokenizedInput()
 	string tempString;
 	string peekString;
 
-	//std::cout << "We got this far" << std::endl;
 	//loop through all elements in the vector
 	for(int i = 0; i < tokenizedInputVector.size(); i++)
 	{
@@ -456,7 +440,6 @@ bool XMLParser::parseTokenizedInput()
 		vecStruct = tokenizedInputVector.at(i);
 		//assign string
 		tempString = vecStruct.tokenString;
-		//std::cout << "should see this 16 times" << std::endl;
 		if(vecStruct.tokenType == 1 )	//token type is a start tag
 		{
 			//push into stack
@@ -485,10 +468,11 @@ bool XMLParser::parseTokenizedInput()
 			elementNameBag->add(tempString);
 		}
 	}
+	Parse = true;
 	return true;
 }
 
-// TODO: Implement the clear method here
+//  clear method 
 void XMLParser::clear()
 {
 	//need to delete the stack and the bag
@@ -507,18 +491,54 @@ void XMLParser::clear()
 
 vector<TokenStruct> XMLParser::returnTokenizedInput() const
 {
+	//shouldnt have to do anything
 	return tokenizedInputVector;
 }
 
-// TODO: Implement the containsElementName method
+// containsElementName method
 bool XMLParser::containsElementName(const std::string &inputString) const
 {
-	return false;
+	//if both parse and tokenize are true, find names
+	if(Parse && Tokenize == 1)
+	{
+		//begin search
+		for(int i = 0; i < elementNameBag->size(); i++)
+		{
+			if(elementNameBag->contains(inputString))
+			{
+				return true;
+			}
+		}
+		return false;	//reached the end of loop and hasnt found any matches
+	}
+	//throw a logical error
+	throw(std::logic_error("Error"));
 }
 
-// TODO: Implement the frequencyElementName method
+// frequencyElementName method
 int XMLParser::frequencyElementName(const std::string &inputString) const
 {
-	return -1;
+	//std:cout << "The size of the element bag: " << elementNameBag->size() << std::endl;
+	if(Parse && Tokenize == 1)
+	{
+		int count = 1;
+
+		//createa a vector from bag
+		std::vector <std::string> vec1= elementNameBag->toVector();
+		for(int i = 0; i < elementNameBag->size(); i++)
+		{
+			if(vec1.at(i) == inputString)
+			{
+				count++;
+			}
+		}
+
+		//dont need the vector anymore
+		//unallocate
+		vec1 = std::vector<std::string>();
+		return count;
+	}
+	//throw an exception
+	throw(std::logic_error("Error"));
 }
 
