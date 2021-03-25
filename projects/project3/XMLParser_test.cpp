@@ -44,7 +44,7 @@ TEST_CASE( "Test Stack push", "[XMLParser]" )
 		}
 } 
 
-/*TEST_CASE( "Test XMLParser tokenizeInputString", "[XMLParser]" )
+TEST_CASE( "Test XMLParser tokenizeInputString", "[XMLParser]" )
 {
 	   INFO("Hint: tokenize single element test of XMLParse");
 		// Create an instance of XMLParse
@@ -53,5 +53,5 @@ TEST_CASE( "Test Stack push", "[XMLParser]" )
 		bool success;
 		success = myXMLParser.tokenizeInputString(testString);
 		REQUIRE(success);
-} */
+} 
 

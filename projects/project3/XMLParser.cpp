@@ -491,6 +491,18 @@ bool XMLParser::parseTokenizedInput()
 // TODO: Implement the clear method here
 void XMLParser::clear()
 {
+	//need to delete the stack and the bag
+	delete elementNameBag;
+	delete parseStack;
+	//delete the vector
+	int i = 0;
+	while(i < tokenizedInputVector.size())
+	{
+		tokenizedInputVector.pop_back(); //removes elements
+		i++;
+	}
+	//sets token vector = to new vector with no allocated memory;
+	tokenizedInputVector = std::vector<TokenStruct>();
 }
 
 vector<TokenStruct> XMLParser::returnTokenizedInput() const
