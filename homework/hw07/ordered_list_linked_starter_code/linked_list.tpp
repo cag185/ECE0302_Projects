@@ -1,3 +1,4 @@
+//change the implementation to start at index 0
 #include "linked_list.hpp"
 
 template <typename T>
@@ -23,7 +24,7 @@ template <typename T>
 LinkedList<T>::LinkedList(const LinkedList<T>& x)
 {
   //incrementing variable
-  std::size_t i = 1;
+  std::size_t i = 0;
   //set head to temp pointer
   Node<T>* newNodePtr;// = new Node<T>;
   newNodePtr = x.head;
@@ -61,7 +62,7 @@ template <typename T>
 LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& x)
 {
   //incrementing variable
-  std::size_t i = 1;
+  std::size_t i = 0;
   //set head to temp pointer
   Node<T>* newNodePtr;
   newNodePtr = x.head;
@@ -103,7 +104,7 @@ template <typename T>
 bool LinkedList<T>::insert(std::size_t position, const T& item)
 {
   ///Cases for insertion
-    //1. insert at the beginning (index 1)
+    //1. insert at the beginning (index 0)
     //2. insert in the middle
     //3. insert at the end
 
@@ -111,7 +112,7 @@ bool LinkedList<T>::insert(std::size_t position, const T& item)
     Node <T>* newNodePtr;// = new Node<T>;
 
     //case 1
-    if(position == 1)
+    if(position == 0)
     {
       newNodePtr = new Node <T>;
       //set value
@@ -127,7 +128,7 @@ bool LinkedList<T>::insert(std::size_t position, const T& item)
     }
 
     //case 2
-    if(position > 1 && position < listLength)
+    if(position > 0 && position < listLength)
     {
       //set newpointer = to head
       newNodePtr = head;
@@ -135,7 +136,7 @@ bool LinkedList<T>::insert(std::size_t position, const T& item)
       Node <T>* placeholder; //= new Node<T>;
       Node <T>* newNode2 = new Node<T>;
       //loop until postion
-      for(std::size_t i = 1; i<position-1; i++)
+      for(std::size_t i = 0; i<position-1; i++)
       {
         newNodePtr = newNodePtr->getNext(); // follow the list until pos
       }
@@ -155,7 +156,7 @@ bool LinkedList<T>::insert(std::size_t position, const T& item)
       Node <T>* newNode2 = new Node<T>;
       //assign pointer to head
       newNodePtr = head;
-      for(std::size_t i = 1; i <listLength; i++)
+      for(std::size_t i = 0; i <listLength; i++)
       {
           //copy all values
           newNodePtr = newNodePtr->getNext();
@@ -187,7 +188,7 @@ bool LinkedList<T>::remove(std::size_t position)
     Node <T>* newNode;// = new Node<T>;
     Node <T>* placeholder;// = new Node<T>;
   //1.
-  if(position == 1)
+  if(position == 0)
   {
     //snag the next item in line
     newNodePtr = head->getNext();
@@ -204,12 +205,12 @@ bool LinkedList<T>::remove(std::size_t position)
   }
 
   //2. in the middle
-  if(position > 1 && position < listLength)
+  if(position > 0 && position < listLength)
   {
     //start at head
     newNodePtr = head;
     //follow the linked list until position
-    for(std::size_t i = 1; i < position-1; i++)
+    for(std::size_t i = 0; i < position-1; i++)
     {
       newNodePtr = newNodePtr->getNext();
     }
@@ -233,7 +234,7 @@ bool LinkedList<T>::remove(std::size_t position)
   {
     //loop until before the last item and make the next null
     newNodePtr = head;  //assign to head
-    for(std::size_t a = 1; a <position-1; a++)
+    for(std::size_t a = 0; a <position-1; a++)
     {
       newNodePtr = newNodePtr->getNext(); // follow list till before position
     }
@@ -277,7 +278,7 @@ T LinkedList<T>::getEntry(std::size_t position) const
   Node<T>* newNodePointer;// = new Node<T>;
   newNodePointer = head;
   //create a loop that starts at head and for Position times, returns the value of data
-  for(std::size_t i = 1; i < position; i++ )
+  for(std::size_t i = 0; i < position; i++ )
   {
     newNodePointer = newNodePointer->getNext();
   }
@@ -293,7 +294,7 @@ void LinkedList<T>::setEntry(std::size_t position, const T& newValue)
   Node<T>* newNodePtr;// = new Node<T>;
   newNodePtr = head; // set at the beggining
   //loop for position
-  for(std::size_t i = 1; i <=position-1; i++)
+  for(std::size_t i = 0; i <=position-1; i++)
   {
    newNodePtr = newNodePtr->getNext(); // advances through list 
   }
