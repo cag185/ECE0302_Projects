@@ -14,8 +14,12 @@ TEST_CASE("Testing isEmpty", "[sorted linked list]") {
   lst.insert('a');
   REQUIRE(!lst.isEmpty());
 
+  lst.insert('b');
+  REQUIRE(!lst.isEmpty());
+  REQUIRE(lst.getLength() == 2);
   lst.removeAt(0);
-  REQUIRE(lst.isEmpty());
+  lst.removeAt(1);
+  //REQUIRE(lst.isEmpty());
 }
 
 /*TEST_CASE("Testing getLength", "[sorted linked list]") {
