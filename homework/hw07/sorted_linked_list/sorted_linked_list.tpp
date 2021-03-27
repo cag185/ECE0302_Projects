@@ -40,15 +40,30 @@ std::size_t SortedLinkedList<T>::getLength()
 template <typename T>
 void SortedLinkedList<T>::insert(const T& item)
 {
-  //create a temp node ptr
-  Node <T>* temp;
-  Node <T> * AfterNode;
-  Node <T> * insertNode =  new Node <T>;
-  temp = head;
   // want to insert an item in the sorted location
   std::cout << "We are in insert" << std::endl;
 
+  //if the size is zero
+  if(getLength() == 0)
+  {
+    //test
+    std::cout << "We have inserted into an empty LL" << std::endl;
+     LinkedList<T>::insert(0,item); //enters the item to the first position
+     return;
+  }
+  for(int i  = 0; i < getLength(); i++)
+  {
+    //if we reach the value we are trying to insert
+    if(getEntry(i) >= item)
+    {
+      //inserts at the position we found to be greater than or equal to the item
+      //test
+      std::cout << "We have inserted in a non-empty LL" << std::endl;
+       LinkedList<T>::insert(i, item);  
+       return;
+    }
 
+  }
   //increment size
   listLength++;
 
@@ -79,7 +94,7 @@ void SortedLinkedList<T>::clear()
 template <typename T>
 T SortedLinkedList<T>::getEntry(std::size_t position)
 {
-  return LinkedList<T>::getEntry(position); // was position + 1 before
+   LinkedList<T>::getEntry(position); // was position + 1 before
 }
 
 template <typename T>

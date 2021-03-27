@@ -12,11 +12,10 @@ TEST_CASE("Testing isEmpty", "[sorted linked list]") {
   REQUIRE(lst.isEmpty());
 
   lst.insert('a');
-  std::cout << "we have inserted" << std::endl;
   REQUIRE(!lst.isEmpty());
 
-  //lst.removeAt(0);
-  //REQUIRE(lst.isEmpty());
+  lst.removeAt(0);
+  REQUIRE(lst.isEmpty());
 }
 
 /*TEST_CASE("Testing getLength", "[sorted linked list]") {
