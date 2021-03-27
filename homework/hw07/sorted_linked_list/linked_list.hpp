@@ -1,3 +1,4 @@
+//had to change
 #ifndef _LINKED_LIST_HPP_
 #define _LINKED_LIST_HPP_
 
@@ -47,7 +48,11 @@ public:
 
 private:
 
-  //TODO
+  //Need three pointers
+    //1. head
+    //3. nodePtr
+  Node <T>* head; //creates head pointer
+  std::size_t listLength;
   
 };
 

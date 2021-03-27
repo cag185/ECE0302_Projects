@@ -12,13 +12,14 @@ TEST_CASE("Testing isEmpty", "[sorted linked list]") {
   REQUIRE(lst.isEmpty());
 
   lst.insert('a');
+  std::cout << "we have inserted" << std::endl;
   REQUIRE(!lst.isEmpty());
 
-  lst.removeAt(0);
-  REQUIRE(lst.isEmpty());
+  //lst.removeAt(0);
+  //REQUIRE(lst.isEmpty());
 }
 
-TEST_CASE("Testing getLength", "[sorted linked list]") {
+/*TEST_CASE("Testing getLength", "[sorted linked list]") {
   ListType lst;
   REQUIRE(lst.getLength() == 0);
 
@@ -193,3 +194,4 @@ TEST_CASE("Testing exceptions", "[sorted linked list]") {
   CHECK_THROWS_AS(lst.removeAt(-1), std::range_error);
   CHECK_THROWS_AS(lst.getEntry(-1), std::range_error);
 }
+*/

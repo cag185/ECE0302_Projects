@@ -50,6 +50,10 @@ public:
 private:
 
   // TODO
+  //node head pointer--already created--"head"
+  Node <T> * head; 
+  //size variable --"listLength"
+  std::size_t listLength;
 
 };
 
