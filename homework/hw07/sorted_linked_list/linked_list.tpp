@@ -117,6 +117,7 @@ bool LinkedList<T>::insert(std::size_t position, const T& item)
       newNodePtr = new Node <T>;
       //set value
       newNodePtr->setItem(item);
+      std::cout << "the value is: " << newNodePtr->getItem() << std::endl;
       //set next
       newNodePtr->setNext(head);
       //replace head with newNodePtr so that the pointer is the start and the head becomes the tail, which is null
@@ -171,6 +172,30 @@ bool LinkedList<T>::insert(std::size_t position, const T& item)
       //return
       return true;
     }
+    //case 4. at the end of the list
+    if(position == listLength)
+    {
+      //create a second node
+      Node <T>* newNode2 = new Node<T>;
+      //assign pointer to head
+      newNodePtr = head;
+      for(std::size_t i = 0; i <listLength-1; i++)  //0
+      {
+          //copy all values
+          newNodePtr = newNodePtr->getNext();
+      }
+      //now newNodePtr = the last item in the list
+      //assign value to new node
+      newNode2->setItem(item);
+      std::cout << "The last entry: " << newNode2->getItem() << std::endl;
+      //set new node to be the next node
+      newNodePtr->setNext(newNode2);
+      //increase size
+      listLength++;
+      //return
+      return true;
+    }
+
   return false;
 }
 
@@ -190,6 +215,16 @@ bool LinkedList<T>::remove(std::size_t position)
   //1.
   if(position == 0) //0
   {
+    std::cout << "This is the remove we are using (position == 0)" << std::endl;
+    //remove the first index when there is no next
+    if(getLength() == 1)
+    {
+      std::cout << "the length is 1 and we are going to call clear" << std::endl;
+      head = nullptr;
+      
+      listLength--;
+      return true;
+    }
     //snag the next item in line
     newNodePtr = head->getNext();
     delete head;
@@ -230,8 +265,9 @@ bool LinkedList<T>::remove(std::size_t position)
   }
 
   //case 3 at the end
-  if(position== listLength)
+  if(position== listLength && position > 0)
   {
+    std::cout << "This is the remove we are using (position == listLength)" << std::endl;
     //loop until before the last item and make the next null
     newNodePtr = head;  //assign to head
     for(std::size_t a = 0; a <position-1; a++)  //0

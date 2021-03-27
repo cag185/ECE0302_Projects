@@ -17,12 +17,12 @@ TEST_CASE("Testing isEmpty", "[sorted linked list]") {
   lst.insert('b');
   REQUIRE(!lst.isEmpty());
   REQUIRE(lst.getLength() == 2);
-  lst.removeAt(1);
+  lst.removeAt(0);
   lst.removeAt(0);
   REQUIRE(lst.isEmpty());
 }
 
-/*TEST_CASE("Testing getLength", "[sorted linked list]") {
+TEST_CASE("Testing getLength", "[sorted linked list]") {
   ListType lst;
   REQUIRE(lst.getLength() == 0);
 
@@ -32,16 +32,23 @@ TEST_CASE("Testing isEmpty", "[sorted linked list]") {
   lst.insert('a');
   REQUIRE(lst.getLength() == 2);
 
+  
   lst.removeAt(0);
+  
   REQUIRE(lst.getLength() == 1);
+  //std::cout << "Size of list: " << lst.getLength() << std::endl;
+  //std::cout << "the first remove(0) worked" << std::endl;
 
   lst.removeAt(0);
+  //std::cout << "Working until this point" << std::endl;
   REQUIRE(lst.getLength() == 0);
+  //std::cout <<"The second remove(0) worked" << std::endl;
 }
+
 
 TEST_CASE("Testing insert", "[sorted linked list]") {
   ListType lst;
-
+  REQUIRE(lst.getLength() == 0);
   char c = 'a';
   while (c <= 'z') {
     lst.insert(c);
@@ -49,11 +56,13 @@ TEST_CASE("Testing insert", "[sorted linked list]") {
   }
   REQUIRE(lst.getLength() == 26);
 
+  std::cout << "the value at 0 is " << lst.getEntry(1) << std::endl;
   for (int i = 0; i < 26; ++i) {
+    std::cout << "The entry at " << i << " is " << lst.getEntry(i) << std::endl;
     REQUIRE(lst.getEntry(i) == 'a' + i);
   }
 }
-
+//THE LASt PLACE I HAVE TESTED
 TEST_CASE("Testing remove", "[sorted linked list]") {
   ListType lst;
 
@@ -81,7 +90,7 @@ TEST_CASE("Testing remove", "[sorted linked list]") {
   REQUIRE(lst.getEntry(21) == 'y');
 }
 
-TEST_CASE("Testing clear", "[sorted linked list]") {
+/*TEST_CASE("Testing clear", "[sorted linked list]") {
   ListType lst;
 
   char c = 'a';
