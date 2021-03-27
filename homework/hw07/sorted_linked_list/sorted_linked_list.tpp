@@ -84,7 +84,16 @@ void SortedLinkedList<T>::remove(const T& item)
 {
   if(isEmpty()) throw std::range_error("empty list in remove");
   
-  // todo
+  //loop until item we want to remove is found
+  for (int i = 0; i < getLength(); i++)
+  {
+    if(getEntry(i) == item)
+    {
+      //remove
+      LinkedList<T>::remove(i);
+      return;
+    }
+  }
 }
 
 template <typename T>
