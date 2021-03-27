@@ -79,7 +79,7 @@ void SortedLinkedList<T>::insert(const T& item)
   }
 }
 
-template <typename T>
+template <typename T> //Done
 void SortedLinkedList<T>::remove(const T& item)
 {
   if(isEmpty()) throw std::range_error("empty list in remove");
@@ -96,12 +96,14 @@ void SortedLinkedList<T>::remove(const T& item)
   }
 }
 
-template <typename T>
+template <typename T> //Done
 void SortedLinkedList<T>::removeAt(std::size_t position)
 {
   if(isEmpty()) throw std::range_error("empty list in remove");
   
-  // todo
+  //remove
+  LinkedList<T>::remove(position);
+  return;
 }
 
 template <typename T> //DONE 
