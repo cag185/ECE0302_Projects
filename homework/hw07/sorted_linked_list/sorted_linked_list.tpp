@@ -127,7 +127,7 @@ template <typename T> //DONE
 T SortedLinkedList<T>::getEntry(std::size_t position)
 {
   if(isEmpty()) throw std::range_error("empty list in get entry");
-  if(position >= getLength()) throw std::range_error("empty list in get entry");
+  if(position >= getLength()) throw std::range_error("empty list in get entry"); //
   return LinkedList<T>::getEntry(position); // was position + 1 before
 }
 
