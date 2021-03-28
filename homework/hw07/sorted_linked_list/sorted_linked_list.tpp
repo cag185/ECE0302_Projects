@@ -89,8 +89,10 @@ void SortedLinkedList<T>::insert(const T& item)
 template <typename T> //Done
 void SortedLinkedList<T>::remove(const T& item)
 {
-  if(isEmpty()) throw std::range_error("empty list in remove");
-  
+  if(isEmpty()) 
+  {
+    throw std::range_error("empty list in remove");
+  }
   //loop until item we want to remove is found
   for (int i = 0; i < getLength(); i++)
   {
@@ -107,6 +109,8 @@ template <typename T> //Done
 void SortedLinkedList<T>::removeAt(std::size_t position)
 {
   if(isEmpty()) throw std::range_error("empty list in remove");
+  if(position >= getLength()) 
+    throw std::range_error("attempting to remove an element that does not exist");
   
   //remove
   LinkedList<T>::remove(position);
@@ -122,6 +126,8 @@ void SortedLinkedList<T>::clear()
 template <typename T> //DONE
 T SortedLinkedList<T>::getEntry(std::size_t position)
 {
+  if(isEmpty()) throw std::range_error("empty list in get entry");
+  if(position >= getLength()) throw std::range_error("empty list in get entry");
   return LinkedList<T>::getEntry(position); // was position + 1 before
 }
 

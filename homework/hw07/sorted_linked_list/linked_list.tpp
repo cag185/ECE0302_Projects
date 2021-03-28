@@ -73,7 +73,7 @@ LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& x)
   //loop through all elements -- copy
   while(i < x.getLength())
   {
-    this->insert(i, x.getEntry(i)); //snag value at i from x and set it to the node
+    this->insert(i, newNodePtr->getItem()); //snag value at i from x and set it to the node
     //this->insert(x.getEntry(i));
     newNodePtr = newNodePtr->getNext();
     //increment
@@ -87,7 +87,7 @@ template <typename T>
 bool LinkedList<T>::isEmpty() const
 {
   //check if the head pointer is null
-  if(head == nullptr)
+  if(head == nullptr || getLength() == 0)
   {
     return true;
   }

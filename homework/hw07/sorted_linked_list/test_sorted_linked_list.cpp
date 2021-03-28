@@ -195,18 +195,24 @@ TEST_CASE("Testing assignment to/from empty", "[sorted linked list]") {
 TEST_CASE("Testing exceptions", "[sorted linked list]") {
   ListType lst;
 
+  
   CHECK_THROWS_AS(lst.removeAt(0), std::range_error);
+  
   CHECK_THROWS_AS(lst.getEntry(0), std::range_error);
 
+  
   lst.insert('a');
   lst.insert('b');
   lst.insert('c');
   lst.insert('d');
-
+  std::cout << lst.getLength() << std::endl;
+ // std::cout << "we have gotten this far" << std::endl;
   CHECK_THROWS_AS(lst.removeAt(4), std::range_error);
   CHECK_THROWS_AS(lst.removeAt(5), std::range_error);
+  std::cout << "we have gotten this far" << std::endl;
   CHECK_THROWS_AS(lst.getEntry(4), std::range_error);
   CHECK_THROWS_AS(lst.getEntry(5), std::range_error);
+  
 
   CHECK_THROWS_AS(lst.removeAt(-1), std::range_error);
   CHECK_THROWS_AS(lst.getEntry(-1), std::range_error);
