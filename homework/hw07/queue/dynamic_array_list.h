@@ -51,6 +51,7 @@ private:
   std::size_t capacity;
   // Current allocated memory size.
   std::size_t size;
+  std::size_t usedSpace;
   
 };
 

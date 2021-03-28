@@ -47,6 +47,7 @@ private:
 template <typename T, typename L>
 void Queue<T,L>::enqueue(const T& item)
 {
+  //basically tells us to append 
   internal_list.insert(internal_list.getLength(), item);
 }
 

@@ -8,7 +8,11 @@
 template <typename T>
 DynamicArrayList<T>::DynamicArrayList()
 {
-  //TODO
+  //Need to initialize a queue -- create a DA array
+  data = new T [1];   //creates array with size 1
+  usedSpace= 0; //tracks the used space
+  size = 0;//tracks how much memory is allocated
+
 }
   
 template <typename T>
@@ -44,17 +48,41 @@ bool DynamicArrayList<T>::isEmpty()
   return false;
 }
 
-template <typename T>
+template <typename T> // done
 std::size_t DynamicArrayList<T>::getLength()
 {
-  //TODO
-  return 0;
+  //return the size
+  return size;
 }
 
-template <typename T>
+template <typename T> //maybe done
 void DynamicArrayList<T>::insert(std::size_t position, const T& item)
 {
-  //TODO
+  //want to insert an item, will be inserted at the end of the queue
+  if(position == getLength())
+  {
+    //should always be here
+    //if the queue is full, resize
+    if(usedSpace <= getLength())
+    {
+     // std::size_t num = data->getLength() + 1;
+      T * newPoint  = new T [size+1]; //make a slightly larger array
+      for(std::size_t i = 0; i < size; i++)
+      {
+        newPoint[i] = data[i];
+      }
+      //delete the old point
+      delete [] data;
+      //recreate arrPoint
+      T * data = newPoint;
+      //delete the new pointer
+      delete [] newPoint;
+      size++;
+    }
+
+    //actually insert
+    data[position] = item;
+  }
 }
 
 template <typename T>
