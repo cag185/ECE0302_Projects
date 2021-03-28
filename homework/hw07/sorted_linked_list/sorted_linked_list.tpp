@@ -16,6 +16,7 @@ SortedLinkedList<T>::SortedLinkedList(const SortedLinkedList<T> & x):
 template <typename T>
 SortedLinkedList<T>& SortedLinkedList<T>::operator=(const SortedLinkedList<T>& x)
 {
+  std::cout << "We have gotten here" << std::endl;
   LinkedList<T>::operator=(x);
   return *this;
 }
