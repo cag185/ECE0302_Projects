@@ -74,6 +74,7 @@ LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& x)
   while(i < x.getLength())
   {
     this->insert(i, x.getEntry(i)); //snag value at i from x and set it to the node
+    //this->insert(x.getEntry(i));
     newNodePtr = newNodePtr->getNext();
     //increment
     i++;
