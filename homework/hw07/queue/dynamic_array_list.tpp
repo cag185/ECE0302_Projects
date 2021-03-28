@@ -88,7 +88,23 @@ void DynamicArrayList<T>::insert(std::size_t position, const T& item)
 template <typename T>
 void DynamicArrayList<T>::remove(std::size_t position)
 {
-  //TODO
+  //should only have to remove at the beggining
+  if (position == 0)
+  {
+    //need to create a new DDA and copy everything after the first index
+    T * temp = new T [size-1];
+    for(int i  = 1; i < size; i++)
+    {
+      //copy values
+      temp[i] = data[i+1]; //offset to account for index 1
+    }
+    //delete data, remake it, delete temp
+    delete [] data;
+    T * data = temp;
+    delete [] temp;
+    size--;
+    
+  }
 }
 
 template <typename T>
