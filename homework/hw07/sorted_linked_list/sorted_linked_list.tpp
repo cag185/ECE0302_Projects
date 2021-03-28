@@ -51,7 +51,7 @@ void SortedLinkedList<T>::insert(const T& item)
     //test
     //std::cout << "We have inserted into an empty LL" << std::endl;
     //test
-    std::cout << "Inserted : " << item << " at pos: 0" << std::endl;
+    //std::cout << "Inserted : " << item << " at pos: 0" << std::endl;
      LinkedList<T>::insert(0,item); //enters the item to the first position
      return;
   }
@@ -63,7 +63,7 @@ void SortedLinkedList<T>::insert(const T& item)
       //if we reach the value we are trying to insert
       if(getEntry(i) >= item)
       {
-        std::cout << "Inserted : " << item << " at pos: " << i << std::endl;
+        //std::cout << "Inserted : " << item << " at pos: " << i << std::endl;
         //inserts at the position we found to be greater than or equal to the item
         //test
         //std::cout << "We have inserted in a non-empty LL" << std::endl;
@@ -75,9 +75,9 @@ void SortedLinkedList<T>::insert(const T& item)
     //appending to the end
     if(getEntry(getLength()-1) < item)
     {
-      std::cout << "Inserted : " << item << " at pos: " << getLength() << std::endl;
-      std::cout <<"we have appended to a non-empty LL" << std::endl;
-      std::cout << getLength() << std::endl;
+     // std::cout << "Inserted : " << item << " at pos: " << getLength() << std::endl;
+      //std::cout <<"we have appended to a non-empty LL" << std::endl;
+     // std::cout << getLength() << std::endl;
       LinkedList<T>::insert(getLength(),item);
       return;
     }

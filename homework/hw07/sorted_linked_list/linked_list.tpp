@@ -117,7 +117,7 @@ bool LinkedList<T>::insert(std::size_t position, const T& item)
       newNodePtr = new Node <T>;
       //set value
       newNodePtr->setItem(item);
-      std::cout << "the value is: " << newNodePtr->getItem() << std::endl;
+      //std::cout << "the value is: " << newNodePtr->getItem() << std::endl;
       //set next
       newNodePtr->setNext(head);
       //replace head with newNodePtr so that the pointer is the start and the head becomes the tail, which is null
@@ -187,7 +187,7 @@ bool LinkedList<T>::insert(std::size_t position, const T& item)
       //now newNodePtr = the last item in the list
       //assign value to new node
       newNode2->setItem(item);
-      std::cout << "The last entry: " << newNode2->getItem() << std::endl;
+      //std::cout << "The last entry: " << newNode2->getItem() << std::endl;
       //set new node to be the next node
       newNodePtr->setNext(newNode2);
       //increase size
@@ -215,24 +215,26 @@ bool LinkedList<T>::remove(std::size_t position)
   //1.
   if(position == 0) //0
   {
-    std::cout << "This is the remove we are using (position == 0)" << std::endl;
+    //std::cout << "This is the remove we are using (position == 0)" << std::endl;
     //remove the first index when there is no next
     if(getLength() == 1)
     {
-      std::cout << "the length is 1 and we are going to call clear" << std::endl;
+      //std::cout << "the length is 1 and we are going to call clear" << std::endl;
       head = nullptr;
       
       listLength--;
       return true;
     }
+    //std::cout << "This is the remove we are using" << std::endl;
     //snag the next item in line
     newNodePtr = head->getNext();
-    delete head;
+    head = nullptr;
     //remove head
     head = newNodePtr;
     //decrease size
     listLength--;
-    delete newNodePtr;
+    //delete newNodePtr;
+    newNodePtr = nullptr;
     //delete newNode;
     //delete placeholder;
     //return

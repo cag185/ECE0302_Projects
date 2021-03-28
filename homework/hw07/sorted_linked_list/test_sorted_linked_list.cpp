@@ -56,9 +56,9 @@ TEST_CASE("Testing insert", "[sorted linked list]") {
   }
   REQUIRE(lst.getLength() == 26);
 
-  std::cout << "the value at 0 is " << lst.getEntry(1) << std::endl;
+  //std::cout << "the value at 0 is " << lst.getEntry(1) << std::endl;
   for (int i = 0; i < 26; ++i) {
-    std::cout << "The entry at " << i << " is " << lst.getEntry(i) << std::endl;
+    //std::cout << "The entry at " << i << " is " << lst.getEntry(i) << std::endl;
     REQUIRE(lst.getEntry(i) == 'a' + i);
   }
 }
@@ -81,6 +81,8 @@ TEST_CASE("Testing remove", "[sorted linked list]") {
   REQUIRE(lst.getLength() == 24);
   REQUIRE(lst.getEntry(11) == 'n');
 
+  //std::cout << "element at 0 : " << lst.getEntry(0) << std::endl;
+ // std::cout << "element at 1 : " << lst.getEntry(1) << std::endl;
   lst.removeAt(0);
   REQUIRE(lst.getLength() == 23);
   REQUIRE(lst.getEntry(0) == 'b');
