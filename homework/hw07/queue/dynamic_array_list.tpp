@@ -18,14 +18,17 @@ DynamicArrayList<T>::DynamicArrayList()
 template <typename T>
 DynamicArrayList<T>::DynamicArrayList(const DynamicArrayList<T>& x)
 {
-    //TODO
+    //To do
 }
     
 template <typename T>
 DynamicArrayList<T>::~DynamicArrayList()
 {
   std::clog << "DynamicArrayList Destructor called." << std::endl;
-  //TODO
+  //run clear
+  clear();
+  //need to completely remove data
+  delete [] data;
 }
 
 template <typename T>
@@ -44,8 +47,8 @@ void DynamicArrayList<T>::swap(DynamicArrayList<T>& y)
 template <typename T>
 bool DynamicArrayList<T>::isEmpty()
 {
-  //TODO
-  return false;
+  //if size = 0
+  return (size == 0);
 }
 
 template <typename T> // done
@@ -103,14 +106,17 @@ void DynamicArrayList<T>::remove(std::size_t position)
     T * data = temp;
     delete [] temp;
     size--;
-    
   }
 }
 
 template <typename T>
 void DynamicArrayList<T>::clear()
 {
-  //TODO
+  //delete the pointer, resize size
+  size = 0;
+  delete [] data;
+  //reinitialize data array in case we want to clear and have data array in existence
+  T * data = new T [1];
 }
 
 template <typename T>
