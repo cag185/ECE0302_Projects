@@ -18,7 +18,7 @@ public:
   ~DynamicArrayList();
   
   // copy assignment
-  DynamicArrayList& operator=(DynamicArrayList x);
+  DynamicArrayList& operator=(DynamicArrayList &x);
 
   // swap with the input list
   void swap(DynamicArrayList& y);
@@ -51,7 +51,7 @@ private:
   std::size_t capacity;
   // Current allocated memory size.
   std::size_t size;
-  std::size_t usedSpace;
+  
   
 };
 

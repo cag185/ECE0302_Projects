@@ -32,6 +32,20 @@ TEST_CASE("Testing 1", "[queue]") {
   //std::cout << "working till here2" << std::endl;
   REQUIRE(queue.isEmpty());
 
+  //writng my own cases
+  queue.enqueue(4);
+  queue.enqueue(5);
+  queue.enqueue(6);
+  REQUIRE(queue.peekFront()== 4);
+  queue.dequeue();
+  std::cout << "works till right here" << std::endl;
+  REQUIRE(queue.peekFront() == 5);
+  queue.dequeue();
+  REQUIRE(queue.peekFront() == 6);
+  queue.dequeue();
+  REQUIRE(queue.isEmpty());
+
+
   queue.enqueue(241);
   REQUIRE_FALSE(queue.isEmpty());
   REQUIRE(queue.peekFront() == 241);
