@@ -10,16 +10,17 @@ template <typename T>
 DynamicArrayList<T>::DynamicArrayList()
 {
   //Need to initialize a queue -- create a DA array
-  data = new T [1];   //creates array with size 1
-  usedSpace= 0; //tracks the used space
+  data = new T [0];   //creates array with size 1
+  //usedSpace= 0; //tracks the used space
   size = 0;//tracks how much memory is allocated
 
 }
-  
+
+//done?
 template <typename T>
 DynamicArrayList<T>::DynamicArrayList(const DynamicArrayList<T>& x)
 {
-    //To do
+    //To do -- never gets used by queue
 }
     
 //done
@@ -33,17 +34,27 @@ DynamicArrayList<T>::~DynamicArrayList()
   delete [] data;
 }
 
+//done?
 template <typename T>
 DynamicArrayList<T>& DynamicArrayList<T>::operator=(DynamicArrayList<T> x)
 {
-  //TODO
+  //set one queue equal to another
+  //clear();
+  std::cout << "size of x: " << x.size << std::endl;
+  //for (std::size_t i = 0; i < x.getLength(); i++)
+  //{
+    //data[i] = x.getEntry(i);
+  //  std::cout << "the data in the copy: " << data[i] << std::endl;
+  //}
   return *this;
 }
 
+//done?
 template <typename T>
 void DynamicArrayList<T>::swap(DynamicArrayList<T>& y)
 {
   //TODO
+  //never has to actually swap
 }
 
 //done
@@ -69,23 +80,15 @@ void DynamicArrayList<T>::insert(std::size_t position, const T& item)
   {
     //should always be here
     //if the queue is full, resize
-    if(usedSpace <= getLength())
     {
-     // std::size_t num = data->getLength() + 1;
-      T * newPoint  = new T [size+1]; //make a slightly larger array
-      for(std::size_t i = 0; i < size; i++)
+      //new implementation
+      for(std::size_t i = 0; i<getLength(); i++)
       {
-        newPoint[i] = data[i];
+        data[i+1] = data[i];
       }
-      //delete the old point
-      delete [] data;
-      //recreate arrPoint
-      T * data = newPoint;
-      //delete the new pointer
-      delete [] newPoint;
       size++;
+      //std::cout << "The size of the array now " << size <<  std::endl;
     }
-
     //actually insert
     data[position] = item;
   }
@@ -95,12 +98,13 @@ void DynamicArrayList<T>::insert(std::size_t position, const T& item)
 template <typename T>
 void DynamicArrayList<T>::remove(std::size_t position)
 {
+  //std:: cout << "current size = " << size << std::endl;
   //should only have to remove at the beggining
   if (position == 0)
   {
     //need to create a new DDA and copy everything after the first index
     T * temp = new T [size-1];
-    for(int i  = 1; i < size; i++)
+    for(std::size_t i  = 1; i < size; i++)
     {
       //copy values
       temp[i] = data[i+1]; //offset to account for index 1
@@ -108,7 +112,7 @@ void DynamicArrayList<T>::remove(std::size_t position)
     //delete data, remake it, delete temp
     delete [] data;
     T * data = temp;
-    delete [] temp;
+    //delete [] temp;
     size--;
   }
 }
@@ -133,11 +137,17 @@ T DynamicArrayList<T>::getEntry(std::size_t position)
   {
     return data[0];
   }
+  else 
+  {
+    return data[position];
+  }
   return T();
 }
 
+//done?
 template <typename T>
 void DynamicArrayList<T>::setEntry(std::size_t position, const T& newValue)
 {
   //TODO
+  //never actually had to do this for a queue 
 }
