@@ -5,6 +5,7 @@
 
 #include <iostream>
 
+//done
 template <typename T>
 DynamicArrayList<T>::DynamicArrayList()
 {
@@ -21,6 +22,7 @@ DynamicArrayList<T>::DynamicArrayList(const DynamicArrayList<T>& x)
     //To do
 }
     
+//done
 template <typename T>
 DynamicArrayList<T>::~DynamicArrayList()
 {
@@ -44,6 +46,7 @@ void DynamicArrayList<T>::swap(DynamicArrayList<T>& y)
   //TODO
 }
 
+//done
 template <typename T>
 bool DynamicArrayList<T>::isEmpty()
 {
@@ -88,6 +91,7 @@ void DynamicArrayList<T>::insert(std::size_t position, const T& item)
   }
 }
 
+//done maybe
 template <typename T>
 void DynamicArrayList<T>::remove(std::size_t position)
 {
@@ -109,6 +113,7 @@ void DynamicArrayList<T>::remove(std::size_t position)
   }
 }
 
+//done
 template <typename T>
 void DynamicArrayList<T>::clear()
 {
@@ -119,10 +124,15 @@ void DynamicArrayList<T>::clear()
   T * data = new T [1];
 }
 
+//done
 template <typename T>
 T DynamicArrayList<T>::getEntry(std::size_t position)
 {
-  //TODO
+  //should only have to get entry at 0
+  if(position == 0)
+  {
+    return data[0];
+  }
   return T();
 }
 
