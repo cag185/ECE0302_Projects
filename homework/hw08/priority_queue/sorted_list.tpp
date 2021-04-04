@@ -40,13 +40,25 @@ std::size_t SortedList<T, L>::getLength()
 template <typename T, typename L>
 void SortedList<T, L>::insert(const T& item)
 {
-  // TODO
+  // NEED TO ENSURE THAT ITEMS GET INSERTED FARTHER BACK DEPENDING ON THEIR VALUE
+  for(std::size_t i = 0; i < getLength(); i++)
+  {
+    //need to check to see if the value of item is less than the index of the array
+    if(item <= getEntry(i))
+    {
+      //move everything down by one, insert the item
+
+      //insert
+    }
+  }
 }
 
 template <typename T, typename L>
 void SortedList<T, L>::remove(const T& item)
 {
-  // TODO
+  //search for the item, remove it
+  //shift everything back by one
+
 }
 
 template <typename T, typename L>
@@ -70,6 +82,16 @@ T SortedList<T, L>::getEntry(std::size_t position)
 template <typename T, typename L>
 long int SortedList<T, L>::getPosition(const T& newValue)
 {
-  // TODO
-  return 0;
+  //return the position of the first item at that value
+  //traverse the array and when we find the item, record postion
+  for(std::size_t i = 0; i < getLength(); i++)
+  {
+    //loop until we find the value
+    if(newValue == getEntry(i))
+    {
+      return i;
+    }
+  }
+  //return 255 if the array doesnt contain
+  return 255;
 }
