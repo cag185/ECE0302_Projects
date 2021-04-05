@@ -49,7 +49,8 @@
     Node<T> * Point = x.head;
     for(std::size_t i = 0; i < x.getLength(); i++)
     {
-      
+      this->setItem(Point);
+      Point = Point->getNext();
     }
 
   }
