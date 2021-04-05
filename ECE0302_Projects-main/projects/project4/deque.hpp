@@ -13,7 +13,7 @@ private:
   std::size_t size;
   //pointer to the head
   Node<T> * head;
-  
+
   //----------//PUBLIC//----------//
 public:
   //---//ORIGINAL FUNCTIONS//---//
@@ -29,6 +29,9 @@ public:
 
   //COPY CONSTRUCTOR//
   Deque(const Deque& x);
+
+  //get the length
+  std::size_t getLength();
 
   //---//TEMPLATE FUNCTIONS//---//
 

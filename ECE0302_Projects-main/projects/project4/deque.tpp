@@ -45,10 +45,23 @@
   template<typename T>
   Deque<T>::Deque(const Deque& x)
   {
+    //loop from the first element to the last and copy
+    Node<T> * Point = x.head;
+    for(std::size_t i = 0; i < x.getLength(); i++)
+    {
+      
+    }
 
   }
 
   //---//TEMPLATE FUNCTIONS//---//
+
+  //get the length
+  template<typename T>
+  std::size_t Deque<T>::getLength()
+  {
+    return size;
+  }
 
   //returns true if the deque is empty
   template<typename T>
