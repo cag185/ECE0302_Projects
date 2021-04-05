@@ -71,15 +71,16 @@
   template<typename T>
   bool Deque<T>::isEmpty()
   {
+    return(size==0);
     //return false as default
-    return false;
+    //return false;
   }
 
   //add item to the front of the deque
   template<typename T>
   void Deque<T>::pushFront(const T & item)
   {
-
+    
   }
 
   //remove an item at the front of a deque
