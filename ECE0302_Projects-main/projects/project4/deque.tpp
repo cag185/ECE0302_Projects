@@ -38,7 +38,9 @@
   template<typename T>
   Deque<T>& Deque<T>::operator=(const Deque& x)
   {
-
+    //loop through the elements
+    this = Deque(x);
+    return *this;
   }
 
   //COPY CONSTRUCTOR//
@@ -52,7 +54,8 @@
       this->setItem(Point);
       Point = Point->getNext();
     }
-
+    //set the size
+    size = x.size;
   }
 
   //---//TEMPLATE FUNCTIONS//---//
