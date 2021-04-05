@@ -28,6 +28,9 @@ public:
   // return current lenght of the list
   std::size_t getLength();
 
+  //return a current capacity of list
+  std::size_t getCapacity();
+
   // insert item at position in the list using 0-based indexing
   void insert(std::size_t position, const T& item);
 

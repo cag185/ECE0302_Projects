@@ -53,6 +53,12 @@ std::size_t DynamicArrayList<T>::getLength()
 }
 
 template <typename T>
+std::size_t DynamicArrayList<T>::getCapacity()
+{
+  return capacity;
+}
+
+template <typename T>
 void DynamicArrayList<T>::insert(std::size_t position, const T& item)
 {
   //std::clog << "Insert at " << position << " with size " << size << std::endl;

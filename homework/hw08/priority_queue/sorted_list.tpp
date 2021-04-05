@@ -41,6 +41,12 @@ std::size_t SortedList<T, L>::getLength()
 template <typename T, typename L>
 void SortedList<T, L>::insert(const T& item)
 {
+  if(plist.getLength() == 0)
+  {
+    //insert at the start
+    plist.insert(0, item);
+    return;
+  }
   // NEED TO ENSURE THAT ITEMS GET INSERTED FARTHER BACK DEPENDING ON THEIR VALUE
   for(std::size_t i = 0; i < plist.getLength(); i++)
   {
@@ -51,8 +57,13 @@ void SortedList<T, L>::insert(const T& item)
 
       //insert 
       plist.insert(i, item);
+      return;
     }
+    //if the item has to be inserted at the end
   }
+
+  //if the item is being inserted after 
+  plist.insert(plist.getLength(), item);
 }
 
 //done?
@@ -94,7 +105,7 @@ long int SortedList<T, L>::getPosition(const T& newValue)
   for(std::size_t i = 0; i < plist.getLength(); i++)
   {
     //loop until we find the value
-    if(newValue == plist.getEntry(i))
+    if(newValue == getEntry(i))
     {
       return i;
     }
