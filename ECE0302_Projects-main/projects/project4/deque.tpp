@@ -111,7 +111,7 @@
   T Deque<T>::front() const
   {
     //return t as defualt
-    return head;
+    return head->getItem();
   }
 
   //at item to the back of the deque  --//done
@@ -157,6 +157,12 @@
   template<typename T>
   T Deque<T>::back() const
   {
-    //return t as defualt
-    //return T;
+    //create pointer to head
+    Node<T> * newPtr = head;
+    while(newPtr!= nullptr)
+    {
+      newPtr = newPtr->getNext();
+    }    
+    //return the item at the end
+    return newPtr->getItem();
   }
