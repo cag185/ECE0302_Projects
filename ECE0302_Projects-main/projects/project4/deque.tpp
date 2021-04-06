@@ -114,11 +114,21 @@
     return head;
   }
 
-  //at item to the back of the deque
+  //at item to the back of the deque  --//done
   template<typename T>
   void Deque<T>::pushBack(const T & item)
   {
-
+    //create a tempPointer
+    Node<T> * newNode = head;
+    while(newNode!=nullptr)
+    {
+      newNode = newNode->getNext();
+    }
+    //at end of list, add node
+    Node<T> endNode = new Node<T>;
+    newNode->setNext(endNode);
+    endNode->setItem(item);
+    endNode->setNext(nullptr); 
   }
 
   //remove an item at the back of the deque
