@@ -67,7 +67,7 @@
     return size;
   }
 
-  //returns true if the deque is empty
+  //returns true if the deque is empty  --//done
   template<typename T>
   bool Deque<T>::isEmpty()
   {
@@ -125,13 +125,13 @@
       newNode = newNode->getNext();
     }
     //at end of list, add node
-    Node<T> endNode = new Node<T>;
+    Node<T> * endNode = new Node<T>;
     newNode->setNext(endNode);
     endNode->setItem(item);
     endNode->setNext(nullptr); 
   }
 
-  //remove an item at the back of the deque
+  //remove an item at the back of the deque --//done
   template<typename T>
   void Deque<T>::popBack()
   {
@@ -153,7 +153,7 @@
     newNode->setNext(nullptr);
   }
 
-  //returns the item at the back of the deque
+  //returns the item at the back of the deque --//done
   template<typename T>
   T Deque<T>::back() const
   {
