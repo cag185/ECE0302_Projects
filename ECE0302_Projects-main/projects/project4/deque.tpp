@@ -135,7 +135,22 @@
   template<typename T>
   void Deque<T>::popBack()
   {
-
+    //remove an item at the end of queue
+    //create a temp pointer
+    Node<T> *newNode = head;
+    while(newNode!= nullptr)
+    {
+      newNode = newNode->getNext();
+    }
+    //at the end of linked list
+    free(newNode);
+    //might be redundant
+    newNode = head;
+    while(newNode!=nullptr)
+    {
+      newNode = newNode->getNext();
+    }
+    newNode->setNext(nullptr);
   }
 
   //returns the item at the back of the deque
