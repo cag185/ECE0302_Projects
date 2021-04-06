@@ -92,7 +92,7 @@
     head = newHead;
   }
 
-  //remove an item at the front of a deque
+  //remove an item at the front of a deque  --//done
   template<typename T>
   void Deque<T>::popFront()
   {
@@ -106,12 +106,12 @@
 
   }
 
-  //returns the item at the front of the deque
+  //returns the item at the front of the deque --//done
   template<typename T>
   T Deque<T>::front() const
   {
     //return t as defualt
-    //return T;
+    return head;
   }
 
   //at item to the back of the deque
