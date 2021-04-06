@@ -88,12 +88,21 @@
     Node<T> *ptr = head;
     //asssign the newhead to be before the old one
     newHead->setNext(ptr);
+    //reassign
+    head = newHead;
   }
 
   //remove an item at the front of a deque
   template<typename T>
   void Deque<T>::popFront()
   {
+    //want to remove the head
+    //create a temp ptr to head
+    Node<T> *newHead = head;
+    newHead = newHead->getNext();
+    //remove the old head
+    free(head);
+    head = newHead;
 
   }
 
