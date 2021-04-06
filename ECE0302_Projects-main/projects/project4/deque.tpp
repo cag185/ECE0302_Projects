@@ -76,11 +76,18 @@
     //return false;
   }
 
-  //add item to the front of the deque
+  //add item to the front of the deque  --//done
   template<typename T>
   void Deque<T>::pushFront(const T & item)
   {
-    
+    //create a new node and attatch it to the beginning
+    Node<T> * newHead = new Node<T>;
+    newHead->setItem(item);
+
+    //create a new pointer to the head
+    Node<T> *ptr = head;
+    //asssign the newhead to be before the old one
+    newHead->setNext(ptr);
   }
 
   //remove an item at the front of a deque
