@@ -90,6 +90,9 @@
     newHead->setNext(ptr);
     //reassign
     head = newHead;
+
+    //increase size
+    size++;
   }
 
   //remove an item at the front of a deque  --//done
@@ -103,6 +106,8 @@
     //remove the old head
     free(head);
     head = newHead;
+    //decrease size
+    size--;
 
   }
 
@@ -129,6 +134,8 @@
     newNode->setNext(endNode);
     endNode->setItem(item);
     endNode->setNext(nullptr); 
+    //increase size
+    size++;
   }
 
   //remove an item at the back of the deque --//done
@@ -151,6 +158,8 @@
       newNode = newNode->getNext();
     }
     newNode->setNext(nullptr);
+    //decrease size
+    size--;
   }
 
   //returns the item at the back of the deque --//done
