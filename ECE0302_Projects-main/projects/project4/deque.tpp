@@ -120,6 +120,11 @@
   template<typename T>
   T Deque<T>::front() const
   {
+    //throw exception if the list is empty
+    if(isEmpty())
+    {
+      throw std::runtime_error("cant return front while Deque is empty");
+    }
     //return t as defualt
     return head->getItem();
   }
@@ -147,6 +152,11 @@
   template<typename T>
   void Deque<T>::popBack()
   {
+    //make sure the deque isnt empty
+    if(isEmpty())
+    {
+      throw std::runtime_error("cant pop the back if the deque is empty");
+    }
     //remove an item at the end of queue
     //create a temp pointer
     Node<T> *newNode = head;
@@ -171,6 +181,12 @@
   template<typename T>
   T Deque<T>::back()const
   {
+    //check if empty
+    if(isEmpty())
+    {
+      //throw error
+      throw std::runtime_error("cant return the back if deque is empty");
+    }
     //create pointer to head
     Node<T> * newPtr = head;
     while(newPtr!= nullptr)
