@@ -99,6 +99,11 @@
   template<typename T>
   void Deque<T>::popFront()
   {
+    //if empty throw error
+    if(isEmpty())
+    {
+      throw std::runtime_error("Cant pop if the list is empty");
+    }
     //want to remove the head
     //create a temp ptr to head
     Node<T> *newHead = head;

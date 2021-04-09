@@ -17,6 +17,7 @@ TEST_CASE( "PushFront", "[deque]" )
 {
     Deque<int> d;
     d.pushFront(1);
+    //since we added one, is empty is false
     REQUIRE (d.isEmpty()==0);
     
 }
@@ -24,7 +25,8 @@ TEST_CASE( "PushFront", "[deque]" )
 TEST_CASE( "PopFront", "[deque]" ) 
 {
     Deque<int> d;
-    
+    //should not be able to pop without entry
+    REQUIRE_THROWS_AS(d.popFront(), std::runtime_error);
 }
 
 TEST_CASE( "Front", "[deque]" ) 
