@@ -85,6 +85,20 @@ TEST_CASE( "PushBack", "[deque]" )
 TEST_CASE( "PopBack", "[deque]" ) 
 {
     Deque<int> d;
+    //should be removing from the back
+    REQUIRE(d.isEmpty());
+    d.pushFront(5);
+    d.pushFront(4);
+    d.pushFront(3);
+    //order should be 3 4 5
+    REQUIRE(d.getLength() == 3);
+    REQUIRE(d.back() == 5);
+    d.popBack();
+    REQUIRE(d.getLength() == 2);
+    REQUIRE(d.back() == 4);
+    d.popBack();
+    REQUIRE(d.getLength() == 1);
+    REQUIRE(d.back() == 3);
     
 }
 
