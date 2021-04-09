@@ -105,6 +105,14 @@ TEST_CASE( "PopBack", "[deque]" )
 TEST_CASE( "Back", "[deque]" ) 
 {
     Deque<int> d;
+    //need to make sure the value at the end of the deque is returned
+    d.pushBack(1);
+    d.pushBack(2);
+    d.pushBack(3);
+    REQUIRE(d.getLength() == 3);
+    REQUIRE(d.back() == 3);
+    d.popBack();
+    REQUIRE(d.back() == 2);
     
 }
 
