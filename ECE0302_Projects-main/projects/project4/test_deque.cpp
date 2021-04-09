@@ -8,11 +8,14 @@ using namespace std;
 // Student Tests -- implementing tests of the deque
 //template class Deque<int>;
 
+//looks good so far
 TEST_CASE( "IsEmpty", "[deque]" ) 
 {
     Deque<int> d;
     REQUIRE(d.isEmpty() == 1);
 }
+
+//very nice
 TEST_CASE( "PushFront", "[deque]" ) 
 {
     Deque<int> d;
@@ -22,11 +25,18 @@ TEST_CASE( "PushFront", "[deque]" )
     
 }
 
+//sir yes sir
 TEST_CASE( "PopFront", "[deque]" ) 
 {
     Deque<int> d;
     //should not be able to pop without entry
     REQUIRE_THROWS_AS(d.popFront(), std::runtime_error);
+    //add an item
+    d.pushFront(1);
+    REQUIRE(!d.isEmpty());
+    REQUIRE(d.getLength() == 1);
+    d.popFront();
+    REQUIRE(d.isEmpty());
 }
 
 TEST_CASE( "Front", "[deque]" ) 
