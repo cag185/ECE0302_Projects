@@ -182,18 +182,13 @@
     //remove an item at the end of queue
     //create a temp pointer
     Node<T> *newNode = head;
-    while(newNode!= nullptr)
+    int i = 1;
+    while(i < size-1)
     {
       newNode = newNode->getNext();
+      i++;
     }
     //at the end of linked list
-    free(newNode);
-    //might be redundant
-    newNode = head;
-    while(newNode!=nullptr)
-    {
-      newNode = newNode->getNext();
-    }
     newNode->setNext(nullptr);
     //decrease size
     size--;

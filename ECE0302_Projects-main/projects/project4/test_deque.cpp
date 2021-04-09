@@ -71,6 +71,14 @@ TEST_CASE( "PushBack", "[deque]" )
     d.pushBack(1);
     REQUIRE(d.getLength() == 3);
     REQUIRE(d.back() == 1);
+    d.popBack();
+    REQUIRE(d.getLength() == 2);
+    REQUIRE(d.front() == 3);
+    REQUIRE(d.back() == 2);
+    d.popFront();
+    REQUIRE(d.getLength() == 1);
+    REQUIRE(d.front() == 2);
+    REQUIRE(d.back() == 2);
     
 }
 
