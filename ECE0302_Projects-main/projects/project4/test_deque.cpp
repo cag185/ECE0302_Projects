@@ -5,8 +5,8 @@
 #include <iostream>
 using namespace std;
 
-// TODO -- implementing tests of the deque
-template class Deque<int>;
+// Student Tests -- implementing tests of the deque
+//template class Deque<int>;
 
 TEST_CASE( "Tests", "[deque]" ) 
 {

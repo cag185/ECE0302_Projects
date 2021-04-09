@@ -8,7 +8,7 @@
 
   //CONSTRUCTOR//
   template<typename T>
-  Deque<T>::Deque()
+  Deque<T>::Deque():AbstractDeque<T>()
   {
     //reset size to 0
     size = 0;
@@ -69,7 +69,7 @@
 
   //returns true if the deque is empty  --//done
   template<typename T>
-  bool Deque<T>::isEmpty()
+  bool Deque<T>::isEmpty() const noexcept
   {
     return(size==0);
     //return false as default
@@ -155,7 +155,7 @@
 
   //returns the item at the back of the deque --//done
   template<typename T>
-  T Deque<T>::back() const
+  T Deque<T>::back()const
   {
     //create pointer to head
     Node<T> * newPtr = head;
@@ -165,4 +165,4 @@
     }    
     //return the item at the end
     return newPtr->getItem();
-  }
+  } 

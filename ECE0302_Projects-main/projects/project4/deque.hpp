@@ -22,7 +22,7 @@ public:
   Deque();
 
   //DESTRUCTOR//
- ~Deque();
+  ~Deque();
 
   //COPY ASSIGNMENT//
   Deque& operator=(const Deque& x);
@@ -36,7 +36,7 @@ public:
   //---//TEMPLATE FUNCTIONS//---//
 
   //returns true if the deque is empty
-  bool isEmpty();
+  bool isEmpty() const noexcept;
 
   //add item to the front of the deque
   void pushFront(const T & item);
