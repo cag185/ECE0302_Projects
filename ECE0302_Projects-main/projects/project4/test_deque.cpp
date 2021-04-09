@@ -39,10 +39,23 @@ TEST_CASE( "PopFront", "[deque]" )
     REQUIRE(d.isEmpty());
 }
 
+//front works well
 TEST_CASE( "Front", "[deque]" ) 
 {
     Deque<int> d;
-    
+    //items should be added in order FILO
+    d.pushFront(1);
+    d.pushFront(2);
+    d.pushFront(3);
+    REQUIRE(d.getLength() ==3);
+    REQUIRE(!d.isEmpty());
+    REQUIRE(d.front() == 3);
+    d.popFront();
+    REQUIRE(d.getLength() == 2);
+    REQUIRE(d.front() == 2);
+    d.popFront();
+    REQUIRE(d.getLength() == 1);
+    REQUIRE(d.front() == 1);
 }
 
 TEST_CASE( "PushBack", "[deque]" ) 
