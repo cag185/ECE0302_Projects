@@ -43,6 +43,8 @@ TEST_CASE( "PopFront", "[deque]" )
 TEST_CASE( "Front", "[deque]" ) 
 {
     Deque<int> d;
+    //test that we cannot return a front value in an empt deque
+    REQUIRE_THROWS_AS(d.front(), std::runtime_error);
     //items should be added in order FILO
     d.pushFront(1);
     d.pushFront(2);
@@ -58,9 +60,17 @@ TEST_CASE( "Front", "[deque]" )
     REQUIRE(d.front() == 1);
 }
 
+
 TEST_CASE( "PushBack", "[deque]" ) 
 {
     Deque<int> d;
+    //items shold be appended to the back
+    REQUIRE(d.isEmpty());
+    d.pushBack(3);
+    d.pushBack(2);
+    d.pushBack(1);
+    REQUIRE(d.getLength() == 3);
+    REQUIRE(d.back() == 1);
     
 }
 

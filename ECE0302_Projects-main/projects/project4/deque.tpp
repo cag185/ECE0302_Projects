@@ -135,15 +135,37 @@
   {
     //create a tempPointer
     Node<T> * newNode = head;
-    while(newNode!=nullptr)
+    //if empty, push the value to the head positon
+    //need to add a new node before the nullptr
+    if(isEmpty())
+    {
+      //std::cout << "should see this once" << std::endl;
+      Node<T> * newHead = new Node<T>;
+      newHead->setItem(item);
+      newHead->setNext(newNode);
+      head = newHead;
+      size++;
+      return;
+    }
+    while(newNode->getNext() !=nullptr)
     {
       newNode = newNode->getNext();
+      //std::cout << "count" << std::endl;
     }
+    
+    //std::cout << "item: " << newNode->getItem() << std::endl;
+    
+    //create a new node pointer to add value
+    Node<T> * insertNode = new Node<T>;    
+    //std::cout << "Here" << std::endl;
+    insertNode->setItem(item);
+    //std::cout << "Here" << std::endl;
+    newNode->setNext(insertNode);
+   // std::cout << "Here" << std::endl;
+    insertNode->setNext(nullptr);
+    //std::cout << "Here" << std::endl;
     //at end of list, add node
-    Node<T> * endNode = new Node<T>;
-    newNode->setNext(endNode);
-    endNode->setItem(item);
-    endNode->setNext(nullptr); 
+    
     //increase size
     size++;
   }
@@ -189,7 +211,7 @@
     }
     //create pointer to head
     Node<T> * newPtr = head;
-    while(newPtr!= nullptr)
+    while(newPtr->getNext()!= nullptr)
     {
       newPtr = newPtr->getNext();
     }    
