@@ -7,12 +7,27 @@
 using namespace std;
 
 void SolveMaze(pair<int, int> coor, Image<Pixel> maze)
+{
+ //reset the maze with the appropriate solution point
+ //make the correct pixel green
+  //Image<Pixel> maze = readFromFile(argv[1]);  //should yoink the first image
+  maze(coor.first, coor.second) = GREEN;
+}
+//test to see if the suspected solution is a whitespace on the edge of the maze
+bool isSolution(pair<int, int> coor, Image<Pixel> maze)
+{
+  //in order to be on any edge
+  if(coor.first == maze.width()-1 || coor.first == 0 || coor.second == 0 || coor.second == maze.height() - 1)
   {
-   //reset the maze with the appropriate solution point
-   //make the correct pixel green
-    //Image<Pixel> maze = readFromFile(argv[1]);  //should yoink the first image
-    maze(coor.first, coor.second) = GREEN;
+    //we also must have a white piece
+    if(maze(coor.first, coor.second) == WHITE)
+    {
+      return true;
+    }
+    return false;
   }
+  return false;
+}
 
 int main(int argc, char *argv[])
 {
@@ -143,7 +158,10 @@ int main(int argc, char *argv[])
     //check if the starting point is an edge (solution)
     {
       coordinate = frontier.front();
-
+      if(isSolution(coordinate, maze))
+      {
+        SolveMaze(coordinate, maze);
+      }
     }
   }
 
