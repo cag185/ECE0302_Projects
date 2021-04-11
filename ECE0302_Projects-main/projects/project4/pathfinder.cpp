@@ -6,6 +6,14 @@
 #include <utility>
 using namespace std;
 
+void SolveMaze(pair<int, int> coor, Image<Pixel> maze)
+  {
+   //reset the maze with the appropriate solution point
+   //make the correct pixel green
+    //Image<Pixel> maze = readFromFile(argv[1]);  //should yoink the first image
+    maze(coor.first, coor.second) = GREEN;
+  }
+
 int main(int argc, char *argv[])
 {
 
@@ -134,8 +142,10 @@ int main(int argc, char *argv[])
   {
     //check if the starting point is an edge (solution)
     {
+      coordinate = frontier.front();
 
     }
   }
 
 }
+
