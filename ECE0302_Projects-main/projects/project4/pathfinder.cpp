@@ -42,6 +42,7 @@ int main(int argc, char *argv[])
   Deque<pair<int, int>> frontier;
   //generic coordinates
   pair<int, int> coordinate;
+  pair<int, int> tempCoor;
 
   //read in the picture of the maze
   Image<Pixel> maze = readFromFile(argv[1]);  //should yoink the first image
@@ -168,7 +169,77 @@ int main(int argc, char *argv[])
     coordinate = frontier.front();
     frontier.popFront();
     explore[coordinate.first][coordinate.second] = 1;
+
+    //now add the pixels to be explored
+    //must check in order: Prev Row, Next Row, Prev Column, Next Col
+    //ALSO must make sure the potential pixel hasnt been explored yet
+    //ALSO ALSO check to see if the potential pixel is a solution
+
+    if(maze(coordinate.first, coordinate.second-1) == WHITE && explore[coordinate.first][coordinate.second-1] != 1)  //the prev row is valid
+    {
+      //append
+      tempCoor.first = coordinate.first;
+      tempCoor.second = coordinate.second -1;
+
+      if(isSolution(tempCoor, maze))
+      {
+        SolveMaze(tempCoor, maze);
+        //exit succesfully  
+        exit(EXIT_SUCCESS);
+      }
+      //else push the potential coord
+      frontier.pushBack(tempCoor);
+    }
+
+    if(maze(coordinate.first, coordinate.second+1) == WHITE && explore[coordinate.first][coordinate.second+1] != 1)  //the next row is valid
+    {
+      //append
+      tempCoor.first = coordinate.first;
+      tempCoor.second = coordinate.second +1;
+
+      if(isSolution(tempCoor, maze))
+      {
+        SolveMaze(tempCoor, maze);
+        //exit succesfully  
+        exit(EXIT_SUCCESS);
+      }
+      //else push the potential coord
+      frontier.pushBack(tempCoor);
+    }
+
+    if(maze(coordinate.first-1, coordinate.second) == WHITE && explore[coordinate.first-1][coordinate.second] != 1)  //the prev col is valid
+    {
+      //append
+      tempCoor.first = coordinate.first-1;
+      tempCoor.second = coordinate.second;
+
+      if(isSolution(tempCoor, maze))
+      {
+        SolveMaze(tempCoor, maze);
+        //exit succesfully  
+        exit(EXIT_SUCCESS);
+      }
+      //else push the potential coord
+      frontier.pushBack(tempCoor);
+    }
+
+    if(maze(coordinate.first+1, coordinate.second) == WHITE && explore[coordinate.first+1][coordinate.second] != 1)  //the next col is valid
+    {
+      //append
+      tempCoor.first = coordinate.first+1;
+      tempCoor.second = coordinate.second;
+
+      if(isSolution(tempCoor, maze))
+      {
+        SolveMaze(tempCoor, maze);
+        //exit succesfully  
+        exit(EXIT_SUCCESS);
+      }
+      //else push the potential coord
+      frontier.pushBack(tempCoor);
+    }
   }
+  
   //if we reach this point return a failure
   cout << "The program didn't find a solution" << endl;
   exit(EXIT_FAILURE);
