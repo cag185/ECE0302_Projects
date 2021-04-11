@@ -38,8 +38,18 @@
   template<typename T>
   Deque<T>& Deque<T>::operator=(const Deque& x)
   {
-    //loop through the elements
-    this = Deque(x);
+   //loop thorugh elements
+   //this->size = 1;
+   Node<T> * loopNode = x.head;
+   //this->size++;
+   while(loopNode!=nullptr)
+   //for(int i =0 ; i < 1; i ++)
+   {
+     std::cout << loopNode->getItem() << std::endl;
+     this->pushBack(loopNode->getItem());
+     loopNode = loopNode->getNext();
+     
+   }
     return *this;
   }
 
@@ -211,5 +221,6 @@
       newPtr = newPtr->getNext();
     }    
     //return the item at the end
+    //std::cout << "back: " << newPtr->getItem() << std::endl;
     return newPtr->getItem();
   } 
