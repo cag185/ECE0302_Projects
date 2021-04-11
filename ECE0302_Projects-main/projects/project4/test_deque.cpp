@@ -119,8 +119,14 @@ TEST_CASE( "Back", "[deque]" )
 TEST_CASE( "Copy Constructor", "[deque]" ) 
 {
     Deque<int> d;
-    
-
+    d.pushBack(2);
+    d.pushBack(3);
+    d.pushBack(4);
+    REQUIRE(d.getLength() == 3);
+    Deque<int> a(d);
+    REQUIRE(a.getLength() == d.getLength());
+    REQUIRE(a.back() == d.back());
+    REQUIRE(a.front() == d.front());
 }
 
 TEST_CASE( "Copy Assignment", "[deque]" ) 

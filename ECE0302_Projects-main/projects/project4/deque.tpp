@@ -45,10 +45,8 @@
    while(loopNode!=nullptr)
    //for(int i =0 ; i < 1; i ++)
    {
-     std::cout << loopNode->getItem() << std::endl;
      this->pushBack(loopNode->getItem());
      loopNode = loopNode->getNext();
-     
    }
     return *this;
   }
@@ -57,15 +55,17 @@
   template<typename T>
   Deque<T>::Deque(const Deque& x)
   {
-    //loop from the first element to the last and copy
-    Node<T> * Point = x.head;
-    for(std::size_t i = 0; i < x.getLength(); i++)
-    {
-      this->setItem(Point);
-      Point = Point->getNext();
-    }
-    //set the size
-    size = x.size;
+    //loop thorugh elements
+   //this->size = 1;
+   size = 0;
+   Node<T> * loopNode = x.head;
+   //this->size++;
+   while(loopNode!=nullptr)
+   //for(int i =0 ; i < 1; i ++)
+   {
+     this->pushBack(loopNode->getItem());
+     loopNode = loopNode->getNext();
+   }
   }
 
   //---//TEMPLATE FUNCTIONS//---//
