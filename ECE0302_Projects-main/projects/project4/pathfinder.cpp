@@ -3,7 +3,7 @@
 //#include <image.h>
 #include <iostream>
 #include "deque.hpp"
-
+#include <utility>
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -15,7 +15,11 @@ int main(int argc, char *argv[])
   bool redFound = false;
   //flag to see if there are invalid colors
   bool inValColors = false;
-  
+  //frontier deque -- type pair int
+  Deque<pair<int, int>> frontier;
+  //generic coordinates
+  pair<int, int> coordinate;
+
   //read in the picture of the maze
   Image<Pixel> maze = readFromFile(argv[1]);  //should yoink the first image
   //ARRAY TO HOLD MAP
@@ -53,6 +57,9 @@ int main(int argc, char *argv[])
           redFound == true;
           //testing
           cout << "We have a red starting pixel" << endl;
+          coordinate.first = i;
+          coordinate.second = j;
+          frontier.pushBack(coordinate);
         }
         else{
           //cant have more than one red
@@ -118,9 +125,17 @@ int main(int argc, char *argv[])
     cout << "Error: no goal was found. Impossible maze." << endl;
     exit(EXIT_FAILURE);
   }
-  //frontier deque
-  Deque<int> frontier;
+  
+  //push the coordinates of the start
+
   //breadth first function
   //while there is more to explore keep moving
+  while(!frontier.isEmpty())
+  {
+    //check if the starting point is an edge (solution)
+    {
+
+    }
+  }
 
 }
