@@ -3,7 +3,7 @@
 // returns EXIT_FAILURE if not
 #include <iostream>
 
-#include "image.h"
+#include "lib/image.h"
 
 int main(int argc, char *argv[]) {
 
