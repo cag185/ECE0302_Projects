@@ -2,7 +2,7 @@
 #include "lib/image.h"
 //#include <image.h>
 #include <iostream>
-//#include "deque.tpp"
+#include "deque.hpp"
 
 using namespace std;
 
@@ -10,8 +10,6 @@ int main(int argc, char *argv[])
 {
 
   //VARIABLES
-  //array to hold goal
-  int goal[1][2] = {0,0}; // width by height
   bool foundGoal = false;
   //flag to see if red is found -- starting point
   bool redFound = false;
@@ -72,8 +70,6 @@ int main(int argc, char *argv[])
     }
     
   }
-  
-
   //a goal is any edge with a white space
   //pixel 0,0 is the top left
   //check left bounds -- maze(width,heigth)
@@ -82,9 +78,6 @@ int main(int argc, char *argv[])
     //increase height while x is 0
     if(maze(0,i) == WHITE)
     {
-      //goal = these coordinates
-      goal[1][1] = 0;
-      goal[1][2] = i;
       foundGoal == true;
     }
   }
@@ -95,9 +88,6 @@ int main(int argc, char *argv[])
     //increase height while x is 0
     if(maze(maze.width()-1,i) == WHITE)
     {
-      //goal = these coordinates
-      goal[1][1] = maze.width()-1;
-      goal[1][2] = i;
       foundGoal = true;
     }
   }
@@ -108,9 +98,6 @@ int main(int argc, char *argv[])
     //increase height while x is 0
     if(maze(i,0) == WHITE)
     {
-      //goal = these coordinates
-      goal[1][1] = i;
-      goal[1][2] = 0;
       foundGoal = true;
     }
   }
@@ -121,9 +108,6 @@ int main(int argc, char *argv[])
     //increase height while x is 0
     if(maze(i,maze.height()-1) == WHITE)
     {
-      //goal = these coordinates
-      goal[1][1] = i;
-      goal[1][2] = maze.height()-1;
       foundGoal = true;
     }
   }
@@ -134,5 +118,9 @@ int main(int argc, char *argv[])
     cout << "Error: no goal was found. Impossible maze." << endl;
     exit(EXIT_FAILURE);
   }
-  
+  //frontier deque
+  Deque<int> frontier;
+  //breadth first function
+  //while there is more to explore keep moving
+
 }
