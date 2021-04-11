@@ -150,20 +150,27 @@ int main(int argc, char *argv[])
   }
   
   //push the coordinates of the start
-
+  //check if the starting point is an edge (solution)
+  {
+    coordinate = frontier.front();
+    if(isSolution(coordinate, maze))
+    {
+      SolveMaze(coordinate, maze);
+      //exit succesfully
+      exit(EXIT_SUCCESS);
+    }
+  }
   //breadth first function
   //while there is more to explore keep moving
   while(!frontier.isEmpty())
   {
-    //check if the starting point is an edge (solution)
-    {
-      coordinate = frontier.front();
-      if(isSolution(coordinate, maze))
-      {
-        SolveMaze(coordinate, maze);
-      }
-    }
+    //pop the current state from the deque and put in the explored coordinates
+    coordinate = frontier.front();
+    frontier.popFront();
+    explore[coordinate.first][coordinate.second] = 1;
   }
-
+  //if we reach this point return a failure
+  cout << "The program didn't find a solution" << endl;
+  exit(EXIT_FAILURE);
 }
 
