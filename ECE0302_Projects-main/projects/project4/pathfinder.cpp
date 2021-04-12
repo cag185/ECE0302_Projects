@@ -16,12 +16,14 @@ void SolveMaze(pair<int, int> coor, Image<Pixel> maze)
 //test to see if the suspected solution is a whitespace on the edge of the maze
 bool isSolution(pair<int, int> coor, Image<Pixel> maze)
 {
+  cout << "inside is solution" << endl;
   //in order to be on any edge
-  if(coor.first == maze.width()-1 || coor.first == 0 || coor.second == 0 || coor.second == maze.height() - 1)
+  if(coor.first == 0 || coor.first == maze.height() || coor.second == 0 || coor.second == maze.width() )
   {
     //we also must have a white piece
-    if(maze(coor.first, coor.second) == WHITE)
+    if(maze(coor.first, coor.second) != BLACK)
     {
+      cout << "we have a solution" << endl;
       return true;
     }
     return false;
@@ -84,6 +86,7 @@ int main(int argc, char *argv[])
           coordinate.first = i;
           coordinate.second = j;
           frontier.pushBack(coordinate);
+          cout <<"pushed back the origin" << endl;
         }
         else{
           //cant have more than one red
@@ -104,6 +107,7 @@ int main(int argc, char *argv[])
   //a goal is any edge with a white space
   //pixel 0,0 is the top left
   //check left bounds -- maze(width,heigth)
+  /*
   for(int i = 0; i < maze.height(); i++)
   {
     //increase height while x is 0
@@ -149,13 +153,16 @@ int main(int argc, char *argv[])
     cout << "Error: no goal was found. Impossible maze." << endl;
     exit(EXIT_FAILURE);
   }
+  */
   
   //push the coordinates of the start
   //check if the starting point is an edge (solution)
   {
     coordinate = frontier.front();
-    if(isSolution(coordinate, maze))
+    cout << coordinate.first << " "<< coordinate.second << endl;
+    if(isSolution(coordinate, maze)== true)
     {
+      cout << "we start at the solution" << endl;
       maze(coordinate.first, coordinate.second) = GREEN;
       writeToFile(maze, argv[2]);
       //SolveMaze(coordinate, maze);
@@ -163,6 +170,7 @@ int main(int argc, char *argv[])
       exit(EXIT_SUCCESS);
     }
   }
+  cout << "we think that the origin is not the solution" << endl;
   //breadth first function
   //while there is more to explore keep moving
   while(!frontier.isEmpty())
