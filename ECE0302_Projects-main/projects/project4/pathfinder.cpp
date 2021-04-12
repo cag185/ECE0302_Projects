@@ -78,24 +78,21 @@ int main(int argc, char *argv[])
     for (int j = 0; j < maze.height(); j++)
     {
       //look at the pixel, see if it is red
-      if(maze(i,j)== RED)
+      if(maze(i,j)== RED && redFound == false)
       {
-        if(redFound == false)
-        {
-          redFound == true;
-          //testing
-          cout << "We have a red starting pixel" << endl;
-          coordinate.first = i;
-          coordinate.second = j;
-          frontier.pushBack(coordinate);
-          cout <<"pushed back the origin" << endl;
-        }
-        else{
-          //cant have more than one red
-          cout << "ERROR! Cannot have more than one red pixel." << endl;
-          exit(EXIT_FAILURE);
-        }
-        
+       redFound = true;
+       //testing
+       cout << "We have a red starting pixel" << endl;
+       coordinate.first = i;
+       coordinate.second = j;
+       frontier.pushBack(coordinate);
+       cout <<"pushed back the origin" << endl;
+      }
+      else if(maze(i,j)== RED && redFound == true)
+      {
+        //cant have more than one red
+        cout << "ERROR! Cannot have more than one red pixel." << endl;
+        exit(EXIT_FAILURE);
       }
       if(maze(i,j) != RED && maze(i,j) != WHITE && maze(i,j) != BLACK )
       {
