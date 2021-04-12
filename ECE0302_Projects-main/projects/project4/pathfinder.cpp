@@ -101,7 +101,12 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
       }
     }
-    
+  }
+  //if no red detected
+  if(redFound == false)
+  {
+    cout << "No red pixel found" << endl;
+    exit(EXIT_FAILURE);
   }
   //a goal is any edge with a white space
   //pixel 0,0 is the top left
