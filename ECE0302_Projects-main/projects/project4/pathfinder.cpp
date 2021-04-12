@@ -156,7 +156,9 @@ int main(int argc, char *argv[])
     coordinate = frontier.front();
     if(isSolution(coordinate, maze))
     {
-      SolveMaze(coordinate, maze);
+      maze(coordinate.first, coordinate.second) = GREEN;
+      writeToFile(maze, argv[2]);
+      //SolveMaze(coordinate, maze);
       //exit succesfully
       exit(EXIT_SUCCESS);
     }
@@ -168,46 +170,14 @@ int main(int argc, char *argv[])
     //pop the current state from the deque and put in the explored coordinates
     coordinate = frontier.front();
     frontier.popFront();
-    explore[coordinate.first][coordinate.second] = 1;
+    
 
     //now add the pixels to be explored
     //must check in order: Prev Row, Next Row, Prev Column, Next Col
     //ALSO must make sure the potential pixel hasnt been explored yet
     //ALSO ALSO check to see if the potential pixel is a solution
-
-    if(maze(coordinate.first, coordinate.second-1) == WHITE && explore[coordinate.first][coordinate.second-1] != 1)  //the prev row is valid
-    {
-      //append
-      tempCoor.first = coordinate.first;
-      tempCoor.second = coordinate.second -1;
-
-      if(isSolution(tempCoor, maze))
-      {
-        SolveMaze(tempCoor, maze);
-        //exit succesfully  
-        exit(EXIT_SUCCESS);
-      }
-      //else push the potential coord
-      frontier.pushBack(tempCoor);
-    }
-
-    if(maze(coordinate.first, coordinate.second+1) == WHITE && explore[coordinate.first][coordinate.second+1] != 1)  //the next row is valid
-    {
-      //append
-      tempCoor.first = coordinate.first;
-      tempCoor.second = coordinate.second +1;
-
-      if(isSolution(tempCoor, maze))
-      {
-        SolveMaze(tempCoor, maze);
-        //exit succesfully  
-        exit(EXIT_SUCCESS);
-      }
-      //else push the potential coord
-      frontier.pushBack(tempCoor);
-    }
-
-    if(maze(coordinate.first-1, coordinate.second) == WHITE && explore[coordinate.first-1][coordinate.second] != 1)  //the prev col is valid
+    
+    if(maze(coordinate.first-1, coordinate.second) == WHITE && explore[coordinate.first-1][coordinate.second] != 1)  //the prev row is valid
     {
       //append
       tempCoor.first = coordinate.first-1;
@@ -215,15 +185,19 @@ int main(int argc, char *argv[])
 
       if(isSolution(tempCoor, maze))
       {
-        SolveMaze(tempCoor, maze);
+        cout << "we have a solution" << endl;
+        maze(tempCoor.first, tempCoor.second) = GREEN;
+        writeToFile(maze, argv[2]);
+        //SolveMaze(tempCoor, maze);
         //exit succesfully  
         exit(EXIT_SUCCESS);
       }
       //else push the potential coord
+      explore[tempCoor.first][tempCoor.second] = 1;
       frontier.pushBack(tempCoor);
     }
 
-    if(maze(coordinate.first+1, coordinate.second) == WHITE && explore[coordinate.first+1][coordinate.second] != 1)  //the next col is valid
+    if(maze(coordinate.first+1, coordinate.second) == WHITE && explore[coordinate.first+1][coordinate.second] != 1)  //the next row is valid
     {
       //append
       tempCoor.first = coordinate.first+1;
@@ -231,13 +205,58 @@ int main(int argc, char *argv[])
 
       if(isSolution(tempCoor, maze))
       {
-        SolveMaze(tempCoor, maze);
+        cout << "we have a solution" << endl;
+        maze(tempCoor.first, tempCoor.second) = GREEN;
+        writeToFile(maze, argv[2]);
+        //SolveMaze(tempCoor, maze);
         //exit succesfully  
         exit(EXIT_SUCCESS);
       }
       //else push the potential coord
+      explore[tempCoor.first][tempCoor.second] = 1;
       frontier.pushBack(tempCoor);
     }
+
+    if(maze(coordinate.first, coordinate.second-1) == WHITE && explore[coordinate.first][coordinate.second-1] != 1)  //the prev col is valid
+    {
+      //append
+      tempCoor.first = coordinate.first;
+      tempCoor.second = coordinate.second -1;
+
+      if(isSolution(tempCoor, maze))
+      {
+        cout << "we have a solution" << endl;
+        maze(tempCoor.first, tempCoor.second) = GREEN;
+        writeToFile(maze, argv[2]);
+        //SolveMaze(tempCoor, maze);
+        //exit succesfully  
+        exit(EXIT_SUCCESS);
+      }
+      //else push the potential coord
+      explore[tempCoor.first][tempCoor.second] = 1;
+      frontier.pushBack(tempCoor);
+    }
+
+    if(maze(coordinate.first, coordinate.second+1) == WHITE && explore[coordinate.first][coordinate.second+1] != 1)  //the next col is valid
+    {
+      //append
+      tempCoor.first = coordinate.first;
+      tempCoor.second = coordinate.second +1;
+
+      if(isSolution(tempCoor, maze))
+      {
+        cout << "we have a solution" << endl;
+        maze(tempCoor.first, tempCoor.second) = GREEN;
+        writeToFile(maze, argv[2]);
+        //SolveMaze(tempCoor, maze);
+        //exit succesfully  
+        exit(EXIT_SUCCESS);
+      }
+      //else push the potential coord
+      explore[tempCoor.first][tempCoor.second] = 1;
+      frontier.pushBack(tempCoor);
+    }
+
   }
   
   //if we reach this point return a failure
