@@ -13,12 +13,14 @@ void SolveMaze(pair<int, int> coor, Image<Pixel> maze)
   //Image<Pixel> maze = readFromFile(argv[1]);  //should yoink the first image
   maze(coor.first, coor.second) = GREEN;
 }
+int count1 = 0;
 //test to see if the suspected solution is a whitespace on the edge of the maze
 bool isSolution(pair<int, int> coor, Image<Pixel> maze)
 {
-  cout << "inside is solution" << endl;
+  count1++; 
+  cout << count1 << endl;
   //in order to be on any edge
-  if(coor.first == 0 || coor.first == maze.height() || coor.second == 0 || coor.second == maze.width() )
+  if(coor.first == 0 || coor.first == maze.height()-1 || coor.second == 0 || coor.second == maze.width()-1 )
   {
     //we also must have a white piece
     if(maze(coor.first, coor.second) != BLACK)
@@ -191,7 +193,7 @@ int main(int argc, char *argv[])
       tempCoor.first = coordinate.first-1;
       tempCoor.second = coordinate.second;
 
-      if(isSolution(tempCoor, maze))
+      if(isSolution(tempCoor, maze)==true)
       {
         cout << "we have a solution" << endl;
         maze(tempCoor.first, tempCoor.second) = GREEN;
@@ -211,7 +213,7 @@ int main(int argc, char *argv[])
       tempCoor.first = coordinate.first+1;
       tempCoor.second = coordinate.second;
 
-      if(isSolution(tempCoor, maze))
+      if(isSolution(tempCoor, maze)==true)
       {
         cout << "we have a solution" << endl;
         maze(tempCoor.first, tempCoor.second) = GREEN;
@@ -231,7 +233,7 @@ int main(int argc, char *argv[])
       tempCoor.first = coordinate.first;
       tempCoor.second = coordinate.second -1;
 
-      if(isSolution(tempCoor, maze))
+      if(isSolution(tempCoor, maze)==true)
       {
         cout << "we have a solution" << endl;
         maze(tempCoor.first, tempCoor.second) = GREEN;
@@ -251,7 +253,7 @@ int main(int argc, char *argv[])
       tempCoor.first = coordinate.first;
       tempCoor.second = coordinate.second +1;
 
-      if(isSolution(tempCoor, maze))
+      if(isSolution(tempCoor, maze)==true)
       {
         cout << "we have a solution" << endl;
         maze(tempCoor.first, tempCoor.second) = GREEN;
