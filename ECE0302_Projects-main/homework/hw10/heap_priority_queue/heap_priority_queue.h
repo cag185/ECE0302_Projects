@@ -31,7 +31,8 @@ template <typename T>
 bool HeapPriorityQueue<T>::isEmpty()
 {
     //toDo
-    return false;
+    return(lst.isEmpty());
+    
 }
 
 template <typename T>
