@@ -83,8 +83,8 @@ void HeapPriorityQueue<T>::remove()
 template <typename T>
 T HeapPriorityQueue<T>::peek()
 {
-    //todo
-    return T();
+    //return the root
+    return lst.getEntry(0);
 }
 
 
