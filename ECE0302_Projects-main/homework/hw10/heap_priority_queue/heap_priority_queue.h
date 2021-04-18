@@ -45,31 +45,41 @@ void HeapPriorityQueue<T>::add(const T& item)
     //Case where we are inserting into an empty heap
     if(lst.isEmpty())
     {
-        lst.setEntry(0, item);
+        std::cout <<"here" << std::endl;
+        lst.insert(0, item);
+        std::cout << "worked" << std::endl;
         return;
     }
-    //Case where we insert into Array[0] when the heap is not empty
-    //check item w every item in the array
-        bool isLargest = false;
-        int big = 0;
-        for(int i = 0; i < lst.getLength(); i++)
+
+    //Case where we are adding to the middle of a heap or the beggining
+        //always compare the inserted item to its parent
+        //int to hold index of parent
+        int startLoc = lst.getLength();
+        int parentLoc = (startLoc-1)/2;
+        bool correctLoc = false;
+        //insert the value at the end of the array
+        lst.insert(lst.getLength(), item);
+        while(!correctLoc)
         {
-            if(item > lst.getEntry(i))
+            
+            //compare the item to the value at the index of the parent
+            if(item > lst.getEntry((parentLoc)))
             {
-                big++;
+                //swap the items
+                T swapItem = lst.getEntry(parentLoc);
+                lst.setEntry(parentLoc, lst.getEntry(startLoc));
+                lst.setEntry(startLoc, swapItem);
+                //reset the values of start and parent for next iteration
+                startLoc = parentLoc;
+                parentLoc = (startLoc-1)/2;
+            }
+            else
+            {
+                //we have trickled up far enough
+                return;
             }
         }
-        if(big == lst.getLength())
-        {
-            //item is the largest item and should become the new head
-            for(int b = 0; b < lst.getLength(); b++)
-            {
-                lst.setEntry(b+1, lst.getEntry(b));
-            }
-            //set item to head
-            lst.setEntry(0,item);
-        }
-    //Case where we are adding to the middle of a heap
+
 
     
 }
