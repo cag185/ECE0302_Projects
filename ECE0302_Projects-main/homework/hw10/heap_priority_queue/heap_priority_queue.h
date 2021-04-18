@@ -6,7 +6,7 @@
 #include "dynamic_array_list.h"
 
 template <typename T>
-class HeapPriorityQueue: public AbstractPriorityQueue<T>
+class HeapPriorityQueue: public AbstractPriorityQueue<T>    //MaxHeap
 {
 public:
     
@@ -50,20 +50,11 @@ void HeapPriorityQueue<T>::add(const T& item)
         lst.setEntry(0, item);
         return;
     }
-    //case where we are adding to the middle of a heap
-    for(int i = 0; i < lst.getLength(); i++)
-    {
-        if(item > lst.getEntry(i) && item < lst.getEntry(i+1))    //if item is between two points
-        //shift everything after i to i+1
-        for(int j = i+1; j < lst.getLength(); j++)
-        {
-            lst.setEntry(j, lst.getEntry(j+1)); //take every value and shift it by one to the right
-        }
-        //insert the item into the array at index i+1
-        lst.setEntry(i+1, item);
-        return;
-    }
+    //Case where we insert into Array[0] when the heap is not empty
+   
+    //Case where we are adding to the middle of a heap
 
+    
 }
 
 template <typename T>
