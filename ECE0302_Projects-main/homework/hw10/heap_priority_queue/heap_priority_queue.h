@@ -39,11 +39,9 @@ bool HeapPriorityQueue<T>::isEmpty()
 template <typename T>
 void HeapPriorityQueue<T>::add(const T& item)
 {
-    //toDo
     //need to make sure that when we add a value, the Binary Tree is balanced
     //do this by inserting in the correct place
     
-
     //Case where we are inserting into an empty heap
     if(lst.isEmpty())
     {
@@ -51,7 +49,26 @@ void HeapPriorityQueue<T>::add(const T& item)
         return;
     }
     //Case where we insert into Array[0] when the heap is not empty
-   
+    //check item w every item in the array
+        bool isLargest = false;
+        int big = 0;
+        for(int i = 0; i < lst.getLength(); i++)
+        {
+            if(item > lst.getEntry(i))
+            {
+                big++;
+            }
+        }
+        if(big == lst.getLength())
+        {
+            //item is the largest item and should become the new head
+            for(int b = 0; b < lst.getLength(); b++)
+            {
+                lst.setEntry(b+1, lst.getEntry(b));
+            }
+            //set item to head
+            lst.setEntry(0,item);
+        }
     //Case where we are adding to the middle of a heap
 
     
