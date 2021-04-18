@@ -87,11 +87,11 @@ void HeapPriorityQueue<T>::add(const T& item)
 template <typename T>
 void HeapPriorityQueue<T>::remove()
 {
-    std::cout << "in remove" << std::endl;
     //yoink the value at the end of the heap
     lst.setEntry(0, lst.getEntry(lst.getLength()-1));
-    std::cout << "here" << std::endl;
+    std::cout << "root: " << lst.getEntry(0) << std::endl;
     //remove the item at the end of the heap
+    std::cout << "item about to be removed: " << lst.getEntry(lst.getLength()-1) << std::endl;
     lst.remove(lst.getLength()-1);
     std::cout << "here" << std::endl;
 
@@ -104,6 +104,7 @@ void HeapPriorityQueue<T>::remove()
     int rightChild = leftChild + 1;
     T swapItem;
     std::cout <<"we made it past intializing the children" << std::endl;
+    
     bool complete = false;
     int count = 1;
 
@@ -129,57 +130,123 @@ void HeapPriorityQueue<T>::remove()
     }
 
     //test left child and right child
+    //if the length is even, we have a left child, if it is odd, we have a right child
     if(lst.getLength() >= 3)
     {
-    while(!complete)
-    {
-        //keep testind swappin
-        if(lst.getEntry(leftChild) > lst.getEntry(newRoot) && lst.getEntry(rightChild) < lst.getEntry(newRoot))
+        std::cout << "The left child: " << lst.getEntry(leftChild) << ", The right child: " << lst.getEntry(rightChild) << std::endl;
+        while(!complete)
         {
-            std::cout << "left child" << std::endl;
-            //swap the values -- parent and left child
-            swapItem = lst.getEntry(newRoot);
-            lst.setEntry(newRoot, lst.getEntry(leftChild));
-            lst.setEntry(leftChild, swapItem);
-            //reset the root
-            newRoot = leftChild;
-            leftChild = newRoot * 2 + 1;
-            rightChild = leftChild + 1;
-            std::cout << "New Root: " << lst.getEntry(newRoot) << std::endl;
-            std::cout << "Left Child: " << lst.getEntry(leftChild) << std::endl;
-            std::cout << "Right Child: " << lst.getEntry(rightChild) << std::endl;
-
-        }
-        else if(lst.getEntry(rightChild) > lst.getEntry(newRoot) && lst.getEntry(leftChild) < lst.getEntry(newRoot))
-        {
-            std::cout << "right child" << std::endl;
-            //swap the values -- parent and right child
-            swapItem = lst.getEntry(newRoot);
-            lst.setEntry(newRoot, lst.getEntry(rightChild));
-            lst.setEntry(rightChild, swapItem);
-            //reset the root
-            newRoot = rightChild;
-            leftChild = newRoot * 2 + 1;
-            rightChild = leftChild + 1;
-            std::cout << "New Root: " << lst.getEntry(newRoot) << std::endl;
-            std::cout << "Left Child: " << lst.getEntry(leftChild) << std::endl;
-            std::cout << "Right Child: " << lst.getEntry(rightChild) << std::endl;
-        }
-        //check to make sure the root is the greatest
-        for(int i = 1; i < lst.getLength(); i++)
-        {
-            if(lst.getEntry(0) >lst.getEntry(i))
+            //else if there is no right child
+            if(leftChild == lst.getLength()-1)
             {
-                count++;
+                if(lst.getEntry(leftChild) > lst.getEntry(newRoot))
+             {
+                 std::cout << "left child" << std::endl;
+                 //swap the values -- parent and left child
+                 swapItem = lst.getEntry(newRoot);
+                 lst.setEntry(newRoot, lst.getEntry(leftChild));
+                 lst.setEntry(leftChild, swapItem);
+                 //reset the root
+                 newRoot = leftChild;
+                 leftChild = newRoot * 2 + 1;
+
+                 //test for completeness
+                 {
+                     //check to make sure the root is the greatest
+                    for(int i = 1; i < lst.getLength(); i++)
+                    {
+                        if(lst.getEntry(0) >lst.getEntry(i))
+                        {
+                            count++;
+                        }
+                    }
+                    //if the head is greater than all other values
+                    if(count == lst.getLength())
+                    {
+                        complete = true;
+                        return;
+                    }
+                }
+                std::cout << "New Root: " << lst.getEntry(newRoot) << std::endl;
+                std::cout << "Left Child: " << lst.getEntry(leftChild) << std::endl;
+             }
             }
-        }
-        //if the head is greater than all other values
-        if(count == lst.getLength())
-        {
-            complete = true;
-            return;
-        }
-    }    
+
+            //need to see if there is a right child 
+            //else if(rightChild==lst.getLength()-1)
+            else
+            {
+             //keep testind swappin
+             if(lst.getEntry(leftChild) > lst.getEntry(newRoot) && lst.getEntry(rightChild) < lst.getEntry(newRoot))
+             {
+                 std::cout << "left child" << std::endl;
+                 //swap the values -- parent and left child
+                 swapItem = lst.getEntry(newRoot);
+                 lst.setEntry(newRoot, lst.getEntry(leftChild));
+                 lst.setEntry(leftChild, swapItem);
+                 //reset the root
+                 newRoot = leftChild;
+                 leftChild = newRoot * 2 + 1;
+                 rightChild = leftChild + 1;
+                 //test for completeness
+                 {
+                     //check to make sure the root is the greatest
+                    for(int i = 1; i < lst.getLength(); i++)
+                    {
+                        if(lst.getEntry(0) >lst.getEntry(i))
+                        {
+                            count++;
+                        }
+                    }
+                    //if the head is greater than all other values
+                    if(count == lst.getLength())
+                    {
+                        complete = true;
+                        return;
+                    }
+                }
+                std::cout << "New Root: " << lst.getEntry(newRoot) << std::endl;
+                std::cout << "Left Child: " << lst.getEntry(leftChild) << std::endl;
+                std::cout << "Right Child: " << lst.getEntry(rightChild) << std::endl;
+
+             }
+             else if(lst.getEntry(rightChild) > lst.getEntry(newRoot) && lst.getEntry(leftChild) < lst.getEntry(newRoot))
+             {
+                 std::cout << "right child" << std::endl;
+                 //swap the values -- parent and right child
+                 swapItem = lst.getEntry(newRoot);
+                 lst.setEntry(newRoot, lst.getEntry(rightChild));
+                 lst.setEntry(rightChild, swapItem);
+                 //reset the root
+                 newRoot = rightChild;
+                 leftChild = newRoot * 2 + 1;
+                 rightChild = leftChild + 1;
+
+                 //test for completeness
+                 {
+                     //check to make sure the root is the greatest
+                    for(int i = 1; i < lst.getLength(); i++)
+                    {
+                        if(lst.getEntry(0) >lst.getEntry(i))
+                        {
+                            count++;
+                        }
+                    }
+                    //if the head is greater than all other values
+                    if(count == lst.getLength())
+                    {
+                        complete = true;
+                        return;
+                    }
+                }
+                std::cout << "New Root: " << lst.getEntry(newRoot) << std::endl;
+                std::cout << "Left Child: " << lst.getEntry(leftChild) << std::endl;
+                std::cout << "Right Child: " << lst.getEntry(rightChild) << std::endl;
+             }
+            }
+
+            
+        }    
     }
 
 }
