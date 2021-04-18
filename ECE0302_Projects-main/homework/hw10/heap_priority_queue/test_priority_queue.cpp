@@ -64,7 +64,8 @@ TEST_CASE("test remove again", "[remove]")
   REQUIRE(q.peek() == 58);
   q.add(120);
   REQUIRE(q.peek() == 120);
-  std::cout << "THE PROBLEM IS HERE: " << std::endl;
   q.remove();
   REQUIRE(q.peek() == 58);
+  q.remove();
+  REQUIRE(q.peek() == 10);
 }

@@ -177,7 +177,7 @@ void HeapPriorityQueue<T>::remove()
             else
             {
              //keep testind swappin
-             if(lst.getEntry(leftChild) > lst.getEntry(newRoot) && lst.getEntry(rightChild) < lst.getEntry(newRoot))
+             if(lst.getEntry(leftChild) > lst.getEntry(newRoot) && lst.getEntry(rightChild) < lst.getEntry(leftChild))
              {
                  std::cout << "left child" << std::endl;
                  //swap the values -- parent and left child
@@ -210,7 +210,7 @@ void HeapPriorityQueue<T>::remove()
                 std::cout << "Right Child: " << lst.getEntry(rightChild) << std::endl;
 
              }
-             else if(lst.getEntry(rightChild) > lst.getEntry(newRoot) && lst.getEntry(leftChild) < lst.getEntry(newRoot))
+             else if(lst.getEntry(rightChild) > lst.getEntry(newRoot) && lst.getEntry(leftChild) < lst.getEntry(rightChild))
              {
                  std::cout << "right child" << std::endl;
                  //swap the values -- parent and right child
